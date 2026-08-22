@@ -1,7 +1,7 @@
 site:
   name: AstroWind
   site: 'https://www.261449.xyz'
-  base: '/adelie'
+  base: '/adelie-team'
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
