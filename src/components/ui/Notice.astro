@@ -1,0 +1,6 @@
+---
+export interface Props { message: string; id?: string }
+const { message, id } = Astro.props;
+---
+
+<p {...id ? { id } : {}} class="border-2 border-black bg-primary p-2 text-sm font-semibold dark:border-white" role="status">{message}</p>

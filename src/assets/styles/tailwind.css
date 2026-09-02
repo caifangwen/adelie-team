@@ -43,7 +43,7 @@
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-none border-2 border-black bg-white px-6 py-3.5 font-bold text-base text-black leading-snug shadow-[4px_4px_0_#18181b] transition-transform duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none focus:outline-2 focus:outline-offset-4 focus:outline-black dark:border-white dark:bg-zinc-900 dark:text-white dark:shadow-[4px_4px_0_#fff] cursor-pointer;
+  @apply inline-flex items-center justify-center rounded-none border-2 border-black bg-white px-6 py-3.5 font-bold text-base text-black leading-snug shadow-[4px_4px_0_#18181b] transition-transform duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none dark:border-white dark:bg-zinc-900 dark:text-white dark:shadow-[4px_4px_0_#fff] cursor-pointer;
 }
 
 @utility btn-primary {
@@ -100,8 +100,14 @@ main .rounded-lg.border {
 }
 
 :focus-visible {
-  outline: 3px solid var(--aw-color-accent);
-  outline-offset: 3px;
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(255 79 18 / 30%);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: var(--aw-color-primary);
 }
 
 #header.scroll > div:first-child {

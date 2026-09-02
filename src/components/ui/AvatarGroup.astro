@@ -1,0 +1,7 @@
+---
+import Avatar from './Avatar.astro';
+export interface Props { items?: Array<{ initials: string; label?: string }> }
+const { items = [] } = Astro.props;
+---
+
+<div class="flex -space-x-3" aria-label="Avatar group">{items.map((item) => <Avatar {...item} class="h-10 w-10 text-xs" />)}</div>

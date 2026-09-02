@@ -1,0 +1,6 @@
+---
+export interface Props { initials?: string; label?: string; class?: string }
+const { initials = 'UI', label = initials, class: className = '' } = Astro.props;
+---
+
+<span class={`grid h-12 w-12 place-items-center rounded-full border-2 border-black bg-accent font-black dark:border-white ${className}`} aria-label={label}>{initials}</span>

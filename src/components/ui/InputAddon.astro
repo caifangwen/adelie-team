@@ -1,0 +1,6 @@
+---
+export interface Props { addon: string; name?: string; value?: string }
+const { addon, name = 'value', value = '' } = Astro.props;
+---
+
+<div class="flex"><span class="border-2 border-r-0 border-black bg-accent px-3 py-2 text-sm font-bold dark:border-white">{addon}</span><input class="min-w-0 flex-1 border-2 border-black bg-page px-3 py-2 dark:border-white" name={name} value={value} /></div>

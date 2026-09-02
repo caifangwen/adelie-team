@@ -1,0 +1,6 @@
+---
+export interface Props { label?: string }
+const { label = '' } = Astro.props;
+---
+
+<span class="inline-grid min-h-7 min-w-7 place-items-center rounded-full border-2 border-black bg-primary px-1 text-xs font-black dark:border-white">{label}<slot /></span>
