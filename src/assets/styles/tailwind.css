@@ -19,18 +19,7 @@
   --font-serif: var(--aw-font-serif, ui-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-heading: var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
 
-  --animate-fade: fadeInUp 1s both;
-
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(2rem);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  --animate-fade: none;
 }
 
 @utility bg-page {
@@ -82,6 +71,11 @@ h1,
 h2,
 h3 {
   letter-spacing: -0.055em;
+}
+
+/* Widgets previously relied on their entrance animation to clear this state. */
+.motion-safe\:md\:opacity-0 {
+  opacity: 1 !important;
 }
 
 main .rounded,
