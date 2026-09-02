@@ -1,0 +1,104 @@
+---
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+interface Props {
+  body: string;
+  path: string;
+  children?: Array<{ title: string; path: string }>;
+}
+
+type Item = { title: string; description?: string };
+type Section = { title: string; items: Item[] };
+
+const { body, path, children = [] } = Astro.props;
+
+const clean = (value: string) =>
+  value
+    .replaceAll('`', '')
+    .replace(/^[-–—\s]+|[-–—\s]+$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const itemFrom = (line: string): Item => {
+  const text = clean(line);
+  const divider = text.search(/[：:]/);
+  if (divider < 0) return { title: text };
+
+  return { title: clean(text.slice(0, divider)), description: clean(text.slice(divider + 1)) };
+};
+
+const title = clean(body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie');
+const sections: Section[] = body
+  .split(/^##\s+/m)
+  .slice(1)
+  .map((block) => {
+    const [heading = '', ...lines] = block.split('\n');
+    return {
+      title: clean(heading.replace(/^\d+\.\s*/, '')),
+      items: lines
+        .filter((line) => /^-\s+/.test(line))
+        .map((line) => itemFrom(line.replace(/^-\s+/, '')))
+        .filter((item) => item.title && !/^(组件|Footer)/.test(item.title)),
+    };
+  })
+  .filter((section) => section.items.length > 0);
+
+const hero = sections.find((section) => /Hero|Article Header/.test(section.title));
+const heroValue = (label: RegExp) => hero?.items.find((item) => label.test(item.title));
+const heroTitle = heroValue(/标题/)?.description || title;
+const heroSubtitle =
+  heroValue(/正文|摘要|辅助说明/)?.description || hero?.items.find((item) => item.description)?.description;
+const heroTagline = heroValue(/眉题/)?.description || path.split('/')[0]?.toUpperCase();
+const action = heroValue(/按钮|下载|获取|申请/);
+const visibleSections = sections.filter(
+  (section) =>
+    !section.title.includes('Hero') &&
+    !section.title.includes('Article Header') &&
+    !/Header|Footer|CTA/.test(section.title)
+);
+const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录/.test(section.title);
+const isFaq = (section: Section) => /FAQ/.test(section.title);
+---
+
+<HeroText
+  title={heroTitle}
+  subtitle={heroSubtitle}
+  tagline={heroTagline}
+  callToAction={action ? { variant: 'primary', text: action.description || action.title, href: '/contact' } : undefined}
+/>
+
+{
+  visibleSections.map((section, index) =>
+    isFaq(section) ? (
+      <FAQs title={section.title} items={section.items} />
+    ) : isProcess(section) ? (
+      <Steps title={section.title} items={section.items} isReversed={index % 2 === 1} />
+    ) : (
+      <Features title={section.title} items={section.items} columns={section.items.length > 3 ? 3 : 2} />
+    )
+  )
+}
+
+{
+  children.length > 0 && (
+    <Features
+      title="相关内容"
+      items={children.map((child) => ({
+        title: child.title,
+        icon: 'tabler:arrow-up-right',
+        callToAction: { text: '查看详情', href: child.path },
+      }))}
+      columns={children.length > 3 ? 3 : 2}
+    />
+  )
+}
+
+<CallToAction
+  title="先从一次增长诊断开始"
+  subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
+  actions={[{ variant: 'primary', text: '联系 Adelie', href: '/contact' }]}
+/>

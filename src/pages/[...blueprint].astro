@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '~/layouts/PageLayout.astro';
+import BlueprintPage from '~/components/adelie/BlueprintPage.astro';
+
+export const prerender = true;
+
+const pathFromId = (id: string) => id.replace(/(^|\/)index$/, '').replace(/^index$/, '');
+
+export async function getStaticPaths() {
+  const pages = await getCollection('blueprint');
+  const pathFromId = (id: string) => id.replace(/(^|\/)index$/, '').replace(/^index$/, '');
+  return pages.map((page) => {
+    const pathname = pathFromId(page.id);
+    const children = pages
+      .filter((child) => {
+        const childPath = pathFromId(child.id);
+        return childPath.startsWith(`${pathname}/`) && childPath.split('/').length === pathname.split('/').length + 1;
+      })
+      .map((child) => ({
+        path: `/${pathFromId(child.id)}`,
+        title: child.body?.match(/^#\s+(.+)$/m)?.[1] ?? pathFromId(child.id),
+      }));
+    return { params: { blueprint: pathname || undefined }, props: { page, children } };
+  });
+}
+
+const { page, children } = Astro.props;
+const body = page.body ?? '';
+const title = body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie';
+---
+
+<Layout metadata={{ title }}>
+  <BlueprintPage body={body} path={pathFromId(page.id)} children={children} />
+</Layout>

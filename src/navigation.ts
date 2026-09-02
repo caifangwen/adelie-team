@@ -1,182 +1,95 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getAsset, getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
     {
-      text: 'Homes',
+      text: '服务',
       links: [
-        {
-          text: 'SaaS',
-          href: getPermalink('/homes/saas'),
-        },
-        {
-          text: 'Startup',
-          href: getPermalink('/homes/startup'),
-        },
-        {
-          text: 'Mobile App',
-          href: getPermalink('/homes/mobile-app'),
-        },
-        {
-          text: 'Personal',
-          href: getPermalink('/homes/personal'),
-        },
+        { text: 'WordPress 建站', href: getPermalink('/services/wordpress') },
+        { text: 'Shopify 独立站', href: getPermalink('/services/shopify') },
+        { text: 'SEO 增长', href: getPermalink('/services/seo') },
+        { text: 'Google Ads 投放', href: getPermalink('/services/sem') },
+        { text: '整站增长方案', href: getPermalink('/services/growth') },
       ],
     },
     {
-      text: 'Pages',
+      text: '行业方案',
       links: [
-        {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
-        },
-        {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
-        {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
-        },
-        {
-          text: 'About us',
-          href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
-          href: getPermalink('/contact'),
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
-        },
+        { text: 'B2B 外贸', href: getPermalink('/solutions/b2b-export') },
+        { text: 'DTC 品牌出海', href: getPermalink('/solutions/dtc-brand') },
+        { text: '跨境电商', href: getPermalink('/solutions/cross-border-ecommerce') },
+        { text: '企业官网获客', href: getPermalink('/solutions/corporate-lead-gen') },
       ],
     },
     {
-      text: 'Landing',
+      text: '案例',
       links: [
-        {
-          text: 'Lead Generation',
-          href: getPermalink('/landing/lead-generation'),
-        },
-        {
-          text: 'Long-form Sales',
-          href: getPermalink('/landing/sales'),
-        },
-        {
-          text: 'Click-Through',
-          href: getPermalink('/landing/click-through'),
-        },
-        {
-          text: 'Product Details (or Services)',
-          href: getPermalink('/landing/product'),
-        },
-        {
-          text: 'Coming Soon or Pre-Launch',
-          href: getPermalink('/landing/pre-launch'),
-        },
-        {
-          text: 'Subscription',
-          href: getPermalink('/landing/subscription'),
-        },
+        { text: 'WordPress 案例', href: getPermalink('/cases/wordpress') },
+        { text: 'Shopify 案例', href: getPermalink('/cases/shopify') },
+        { text: 'SEO 案例', href: getPermalink('/cases/seo') },
+        { text: 'SEM 案例', href: getPermalink('/cases/sem') },
       ],
     },
     {
-      text: 'Blog',
+      text: '资源',
       links: [
-        {
-          text: 'Blog List',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
+        { text: 'SEO 知识中心', href: getPermalink('/resources/seo') },
+        { text: '广告投放洞察', href: getPermalink('/resources/ads') },
+        { text: 'Shopify / WordPress 教程', href: getPermalink('/resources/wordpress-shopify') },
+        { text: '免费工具', href: getPermalink('/resources/tools') },
       ],
     },
     {
-      text: 'Widgets',
-      href: getPermalink('/components'),
+      text: '关于我们',
+      links: [
+        { text: '团队与方法论', href: getPermalink('/about/team') },
+        { text: '合作流程', href: getPermalink('/about/process') },
+        { text: '资质与伙伴', href: getPermalink('/about/partners') },
+      ],
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind', target: '_blank' }],
+  actions: [{ text: '免费诊断', href: getPermalink('/contact') }],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: '服务',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: 'WordPress 建站', href: getPermalink('/services/wordpress') },
+        { text: 'Shopify 独立站', href: getPermalink('/services/shopify') },
+        { text: 'SEO 增长', href: getPermalink('/services/seo') },
+        { text: 'Google Ads', href: getPermalink('/services/sem') },
       ],
     },
     {
-      title: 'Platform',
+      title: '行业方案',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
+        { text: 'B2B 外贸', href: getPermalink('/solutions/b2b-export') },
+        { text: 'DTC 品牌出海', href: getPermalink('/solutions/dtc-brand') },
+        { text: '跨境电商', href: getPermalink('/solutions/cross-border-ecommerce') },
+        { text: '企业官网获客', href: getPermalink('/solutions/corporate-lead-gen') },
       ],
     },
     {
-      title: 'Support',
+      title: '资源',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
+        { text: 'SEO 知识中心', href: getPermalink('/resources/seo') },
+        { text: '广告投放洞察', href: getPermalink('/resources/ads') },
+        { text: '免费工具', href: getPermalink('/resources/tools') },
       ],
     },
     {
-      title: 'Company',
+      title: '关于 Adelie',
       links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: '团队与方法论', href: getPermalink('/about/team') },
+        { text: '合作流程', href: getPermalink('/about/process') },
+        { text: '资质与伙伴', href: getPermalink('/about/partners') },
+        { text: '联系我们', href: getPermalink('/contact') },
       ],
     },
   ],
-  secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
-  ],
-  socialLinks: [
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
-  ],
-  footNote: `
-    Made by <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo"> Arthelokyo</a> · All rights reserved.
-  `,
+  secondaryLinks: [{ text: '隐私政策', href: getPermalink('/privacy') }],
+  socialLinks: [{ ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') }],
+  footNote: '© Adelie. All rights reserved.',
 };

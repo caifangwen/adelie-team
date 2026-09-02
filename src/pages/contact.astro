@@ -1,79 +1,45 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import Contact from '~/components/widgets/Contact.astro';
+import Features from '~/components/widgets/Features.astro';
 
-const metadata = {
-  title: 'Contact',
-};
+const metadata = { title: '免费诊断 / 联系我们' };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
-
-  <HeroText tagline="Contact" title="Let's Connect!" />
-
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
+  <HeroText
+    tagline="FREE GROWTH DIAGNOSIS"
+    title="先了解你的现状，再给出下一步方向。"
+    subtitle="留下网站、业务目标或广告账户现状。我们会先判断问题与优先级，再确认是否适合合作。"
   />
 
-  <!-- Features2 Widget ************** -->
+  <Contact
+    title="告诉我们你正在解决什么问题"
+    subtitle="必填信息越完整，首次沟通越高效。"
+    inputs={[
+      { type: 'text', name: 'name', label: '姓名', autocomplete: 'name', placeholder: '怎么称呼您？' },
+      { type: 'email', name: 'email', label: '工作邮箱', autocomplete: 'email', placeholder: 'name@company.com' },
+      { type: 'url', name: 'website', label: '网站地址', autocomplete: 'url', placeholder: 'https://example.com' },
+    ]}
+    textarea={{
+      label: '业务目标与当前问题',
+      name: 'message',
+      placeholder: '例如：提高询盘、优化广告线索质量或重构独立站。',
+      rows: 6,
+    }}
+    disclaimer={{ label: '我同意 Adelie 使用以上信息与我沟通本次咨询。' }}
+    button="提交咨询"
+    description="提交后我们会尽快回复；请勿在表单中填写账户密码或其他敏感信息。"
+  />
 
-  <Features2
-    title="We are here to help!"
+  <Features
+    title="合作前，你可以期待什么"
+    columns={3}
     items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
+      { title: '明确下一步', description: '先梳理现状、目标与可验证的优先事项。', icon: 'tabler:direction-sign' },
+      { title: '如实判断', description: '没有真实资料与可执行条件时，不提供虚构承诺。', icon: 'tabler:shield-check' },
+      { title: '共同决策', description: '确认范围、节奏与双方需要准备的内容后再启动。', icon: 'tabler:users-group' },
     ]}
   />
 </Layout>

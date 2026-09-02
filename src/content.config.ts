@@ -66,6 +66,12 @@ const postCollection = defineCollection({
   }),
 });
 
+const blueprintCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/data/blueprints' }),
+  schema: z.object({}),
+});
+
 export const collections = {
   post: postCollection,
+  blueprint: blueprintCollection,
 };
