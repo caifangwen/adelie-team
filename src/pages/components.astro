@@ -1,0 +1,347 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Button from '~/components/ui/Button.astro';
+import Form from '~/components/ui/Form.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+import Announcement from '~/components/widgets/Announcement.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Note from '~/components/widgets/Note.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Contact from '~/components/widgets/Contact.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Component Showcase',
+};
+
+const sampleNav = {
+  links: [
+    { text: 'Home', href: getPermalink('/') },
+    { text: 'Blog', href: getBlogPermalink() },
+    { text: 'Components', href: getPermalink('/components') },
+  ],
+  actions: [],
+};
+
+const sampleFooter = {
+  links: [
+    {
+      title: 'Site',
+      links: [
+        { text: 'Home', href: getPermalink('/') },
+        { text: 'Blog', href: getBlogPermalink() },
+        { text: 'Components', href: getPermalink('/components') },
+      ],
+    },
+  ],
+  secondaryLinks: [],
+  socialLinks: [],
+  footNote: 'Footer sample.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:py-16">
+    <div class="max-w-3xl">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-primary">Component Showcase</p>
+      <h1 class="font-heading text-4xl font-bold tracking-tighter md:text-5xl">Minimal UI reference</h1>
+      <p class="mt-4 text-lg text-muted">
+        A compact preview of the base elements and AstroWind widgets kept in this template.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="mb-6 font-heading text-3xl font-bold tracking-tighter">Base Elements</h2>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="rounded-md border border-gray-200 p-6 dark:border-slate-700">
+        <h3 class="mb-4 text-xl font-bold">Buttons</h3>
+        <div class="flex flex-wrap gap-3">
+          <Button variant="primary" href="#">Primary</Button>
+          <Button variant="secondary" href="#">Secondary</Button>
+          <Button variant="tertiary" href="#">Tertiary</Button>
+          <Button variant="link" href="#">Link</Button>
+        </div>
+      </div>
+
+      <div class="rounded-md border border-gray-200 p-6 dark:border-slate-700">
+        <h3 class="mb-4 text-xl font-bold">Badges</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full bg-primary px-3 py-1 text-sm font-medium text-white">Primary</span>
+          <span class="rounded-full border border-gray-300 px-3 py-1 text-sm font-medium dark:border-slate-600">
+            Neutral
+          </span>
+          <span
+            class="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700 dark:bg-slate-800 dark:text-slate-200"
+          >
+            Subtle
+          </span>
+        </div>
+      </div>
+
+      <div class="rounded-md border border-gray-200 p-6 dark:border-slate-700">
+        <h3 class="mb-4 text-xl font-bold">Typography</h3>
+        <div class="space-y-3">
+          <h1 class="font-heading text-4xl font-bold tracking-tighter">Heading 1</h1>
+          <h2 class="font-heading text-3xl font-bold tracking-tighter">Heading 2</h2>
+          <h3 class="font-heading text-2xl font-bold">Heading 3</h3>
+          <h4 class="text-xl font-bold">Heading 4</h4>
+          <h5 class="text-lg font-bold">Heading 5</h5>
+          <h6 class="text-base font-bold">Heading 6</h6>
+          <p class="text-muted">Body text uses the default muted color for supporting copy.</p>
+          <blockquote class="border-l-4 border-gray-300 pl-4 text-muted dark:border-slate-600">
+            A simple quote style for editorial content.
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="rounded-md border border-gray-200 p-6 dark:border-slate-700">
+        <h3 class="mb-4 text-xl font-bold">Form</h3>
+        <Form
+          inputs={[
+            { type: 'text', name: 'name', label: 'Name', placeholder: 'Jane Doe' },
+            { type: 'email', name: 'email', label: 'Email', placeholder: 'jane@example.com' },
+          ]}
+          textarea={{ label: 'Message', name: 'message', placeholder: 'Short message', rows: 3 }}
+          button="Submit"
+        />
+      </div>
+
+      <div class="rounded-md border border-gray-200 p-6 dark:border-slate-700 lg:col-span-2">
+        <h3 class="mb-4 text-xl font-bold">Card</h3>
+        <div class="max-w-md rounded-md border border-gray-200 p-5 dark:border-slate-700">
+          <p class="text-sm font-semibold uppercase tracking-wide text-primary">Card label</p>
+          <h4 class="mt-2 text-xl font-bold">Simple content card</h4>
+          <p class="mt-2 text-muted">Use this pattern for small repeated content blocks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="mb-6 font-heading text-3xl font-bold tracking-tighter">Widgets</h2>
+  </section>
+
+  <Announcement />
+
+  <div class="border-y border-gray-200 dark:border-slate-800">
+    <Header id="showcase-header" {...sampleNav} />
+  </div>
+
+  <Hero
+    actions={[
+      { variant: 'primary', text: 'Primary action', href: '#' },
+      { text: 'Secondary action', href: '#' },
+    ]}
+  >
+    <Fragment slot="title">Hero section</Fragment>
+    <Fragment slot="subtitle">A centered hero with title, subtitle, and two actions.</Fragment>
+  </Hero>
+
+  <Hero2
+    tagline="Hero variant"
+    actions={[
+      { variant: 'primary', text: 'Start', href: '#' },
+      { variant: 'secondary', text: 'Learn more', href: '#' },
+    ]}
+  >
+    <Fragment slot="title">Split hero layout</Fragment>
+    <Fragment slot="subtitle">Use this variant when the hero needs left-aligned copy and optional media.</Fragment>
+  </Hero2>
+
+  <Note title="Note:" description="A compact announcement-style information band for lightweight page context." />
+
+  <Features
+    title="Features"
+    subtitle="A compact feature grid with common icon and text items."
+    columns={3}
+    items={[
+      { title: 'Fast setup', description: 'Start from a small set of routes.', icon: 'tabler:bolt' },
+      { title: 'Composable', description: 'Build pages from reusable widgets.', icon: 'tabler:layout-grid' },
+      { title: 'Neutral style', description: 'Adjust tokens and classes later.', icon: 'tabler:palette' },
+    ]}
+  />
+
+  <Features2
+    title="Feature cards"
+    subtitle="A card-based feature grid for denser product or service summaries."
+    columns={3}
+    items={[
+      { title: 'Cards', description: 'Useful for grouped capabilities.', icon: 'tabler:cards' },
+      { title: 'Actions', description: 'Each item can include a link.', icon: 'tabler:arrow-right' },
+      { title: 'Icons', description: 'Icons are optional and reusable.', icon: 'tabler:icons' },
+    ]}
+  />
+
+  <Features3
+    title="Feature detail"
+    subtitle="A wider feature block with optional media and supporting points."
+    columns={2}
+    items={[
+      { title: 'Point one', description: 'Short supporting text for the detail block.', icon: 'tabler:check' },
+      { title: 'Point two', description: 'Another concise benefit or capability.', icon: 'tabler:check' },
+    ]}
+  />
+
+  <Steps
+    title="Steps"
+    subtitle="A short process timeline."
+    items={[
+      { title: 'Plan', description: 'Choose the sections you need.', icon: 'tabler:list-check' },
+      { title: 'Compose', description: 'Arrange widgets into pages.', icon: 'tabler:layout' },
+      { title: 'Style', description: 'Tune tokens and component defaults.', icon: 'tabler:paint' },
+    ]}
+  />
+
+  <Content
+    title="Content"
+    subtitle="Text and supporting points in a two-column content section."
+    items={[
+      { title: 'Readable', description: 'Keep copy short and scannable.' },
+      { title: 'Flexible', description: 'Use slots or props depending on the page.' },
+    ]}
+  >
+    <Fragment slot="content">
+      <p>Use the content widget when a page needs explanatory text next to a concise set of supporting points.</p>
+    </Fragment>
+  </Content>
+
+  <Stats
+    title="Stats"
+    subtitle="Simple metrics for proof points or operational summaries."
+    stats={[
+      { title: 'Pages', amount: '5' },
+      { title: 'Posts', amount: '2' },
+      { title: 'Widgets', amount: '8' },
+      { title: 'Theme', amount: '1' },
+    ]}
+  />
+
+  <FAQs
+    title="FAQs"
+    subtitle="A basic question list."
+    columns={2}
+    items={[
+      { title: 'Can I remove widgets?', description: 'Yes. Keep only the components your site uses.' },
+      { title: 'Where do I tune styles?', description: 'Start with Tailwind tokens and CustomStyles.' },
+    ]}
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="mb-6 font-heading text-3xl font-bold tracking-tighter">Special Sections</h2>
+  </section>
+
+  <Brands
+    title="Brands"
+    subtitle="A simple logo or icon strip."
+    icons={['tabler:brand-astro', 'tabler:brand-tailwind', 'tabler:brand-typescript', 'tabler:brand-github']}
+  />
+
+  <Pricing
+    title="Pricing"
+    subtitle="A common plan selection section."
+    prices={[
+      {
+        title: 'Starter',
+        subtitle: 'For simple sites',
+        price: '19',
+        period: 'per month',
+        items: [{ description: 'Core pages' }, { description: 'Basic support' }, { description: 'Static export' }],
+        callToAction: { text: 'Choose starter', href: '#', variant: 'secondary' },
+      },
+      {
+        title: 'Pro',
+        subtitle: 'For growing projects',
+        price: '49',
+        period: 'per month',
+        hasRibbon: true,
+        ribbonTitle: 'Popular',
+        items: [
+          { description: 'All starter features' },
+          { description: 'Component library' },
+          { description: 'SEO setup' },
+        ],
+        callToAction: { text: 'Choose pro', href: '#', variant: 'primary' },
+      },
+      {
+        title: 'Team',
+        subtitle: 'For shared workflows',
+        price: '99',
+        period: 'per month',
+        items: [
+          { description: 'Team templates' },
+          { description: 'Advanced sections' },
+          { description: 'Priority support' },
+        ],
+        callToAction: { text: 'Choose team', href: '#', variant: 'secondary' },
+      },
+    ]}
+  />
+
+  <Testimonials
+    title="Testimonials"
+    subtitle="A compact social-proof section."
+    testimonials={[
+      {
+        title: 'Clear foundation',
+        testimonial: 'The base template is small enough to customize without fighting demo content.',
+        name: 'Alex Chen',
+        job: 'Frontend lead',
+      },
+      {
+        title: 'Easy to scan',
+        testimonial: 'All common sections are visible in one place, which makes style tuning faster.',
+        name: 'Maya Lin',
+        job: 'Product designer',
+      },
+      {
+        title: 'Practical setup',
+        testimonial: 'The route structure stays simple while preserving useful AstroWind widgets.',
+        name: 'Sam Lee',
+        job: 'Builder',
+      },
+    ]}
+  />
+
+  <Contact
+    title="Contact"
+    subtitle="A standard contact form section."
+    inputs={[
+      { type: 'text', name: 'contact-name', label: 'Name', placeholder: 'Jane Doe' },
+      { type: 'email', name: 'contact-email', label: 'Email', placeholder: 'jane@example.com' },
+    ]}
+    textarea={{ label: 'Message', name: 'contact-message', placeholder: 'Tell us what you need', rows: 4 }}
+    button="Send message"
+  />
+
+  <BlogLatestPosts
+    title="Latest posts"
+    information="A blog preview section connected to the content collection."
+    count={2}
+  />
+
+  <CallToAction
+    title="CTA"
+    subtitle="A focused action block for important next steps."
+    actions={[{ variant: 'primary', text: 'Call to action', href: '#' }]}
+  />
+
+  <div class="border-t border-gray-200 dark:border-slate-800">
+    <Footer {...sampleFooter} />
+  </div>
+</Layout>
