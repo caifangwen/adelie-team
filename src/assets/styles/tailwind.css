@@ -125,10 +125,16 @@ main .rounded-lg.border {
 
 #header {
   border-bottom: 3px solid rgb(24 24 27);
+  background-color: var(--aw-color-bg-page);
 }
 
 .dark #header {
   border-color: rgb(255 252 242);
+}
+
+#header.expanded nav {
+  background-color: var(--aw-color-bg-page);
+  border-bottom: 3px solid currentColor;
 }
 
 .dropdown-menu {
