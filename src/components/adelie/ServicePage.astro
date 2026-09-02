@@ -1,0 +1,47 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Step from '~/components/adelie/Step.astro';
+import type { ServicePageData } from '~/data/services';
+
+interface Props {
+  service: ServicePageData;
+}
+
+const { service } = Astro.props;
+---
+
+<Hero
+  tagline={service.tagline}
+  title={service.title}
+  subtitle={service.subtitle}
+  actions={[{ variant: 'primary', text: service.action, href: '/contact' }]}
+/>
+
+<Features title={service.problemsTitle} items={service.problems} columns={service.problems.length > 3 ? 2 : 3} />
+
+<Features
+  title={service.deliverablesTitle}
+  items={service.deliverables}
+  columns={service.deliverables.length > 3 ? 3 : 2}
+/>
+
+<WidgetWrapper containerClass="max-w-5xl">
+  <h2 class="mb-8 text-center text-3xl font-bold tracking-tighter md:mb-12 md:text-4xl">{service.processTitle}</h2>
+  <ol class="grid gap-6 md:grid-cols-2">
+    {service.process.map((step, index) => <Step number={index + 1} {...step} />)}
+  </ol>
+</WidgetWrapper>
+
+<Features title="你会获得什么" items={service.outcomes} columns={3} />
+
+<FAQs title="常见问题" items={service.faqs} columns={3} />
+
+<CallToAction
+  title={service.cta.title}
+  subtitle={service.cta.subtitle}
+  actions={[{ variant: 'primary', text: service.cta.action, href: '/contact' }]}
+/>

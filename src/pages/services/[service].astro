@@ -1,0 +1,17 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ServicePage from '~/components/adelie/ServicePage.astro';
+import { services } from '~/data/services';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { service: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+---
+
+<Layout metadata={{ title: service.name, description: service.subtitle }}>
+  <ServicePage {service} />
+</Layout>
