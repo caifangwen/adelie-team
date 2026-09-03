@@ -1,6 +1,7 @@
 # 广告投放洞察
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1553877522-43269d4ea984`
 - 标题：`把广告从“花钱买点击”，变成可管理的获客系统。`
 - 正文：`Google Ads 策略、追踪、搜索词和落地页优化的实战洞察。`
 - 搜索占位：`搜索 Search、Shopping、追踪或 ROAS`。

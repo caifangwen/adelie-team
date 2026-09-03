@@ -1,6 +1,7 @@
 # 免费工具与下载资料
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1454165804606-c3d57bc86b40`
 - 标题：`先自己判断，再决定要不要找团队。`
 - 正文：`四份简洁清单，帮助你梳理建站、SEO、投放和落地页中最容易遗漏的基本项。`
 - 组件：`SiteHeader`、`ArchiveHero`。

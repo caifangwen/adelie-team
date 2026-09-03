@@ -1,6 +1,7 @@
 # 资质与合作伙伴
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1454165804606-c3d57bc86b40`
 - 标题：`每一项能力，都应有真实依据。`
 - 正文：`这里展示团队实际拥有的平台能力、认证和合作伙伴关系。`
 - 组件：`SiteHeader`、`AboutHero`。

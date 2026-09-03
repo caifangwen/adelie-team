@@ -42,6 +42,7 @@ export const headerData = {
     {
       text: '关于我们',
       links: [
+        { text: '关于 Adelie', href: getPermalink('/about') },
         { text: '团队与方法论', href: getPermalink('/about/team') },
         { text: '合作流程', href: getPermalink('/about/process') },
         { text: '资质与伙伴', href: getPermalink('/about/partners') },

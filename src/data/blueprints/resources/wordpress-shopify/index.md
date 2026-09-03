@@ -1,6 +1,7 @@
 # Shopify / WordPress 教程
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1498050108023-c5249f4df085`
 - 标题：`少走弯路，把网站做好再上线。`
 - 正文：`关于建站准备、页面体验、平台配置、迁移和维护的实用指南。`
 - 搜索占位：`搜索 Shopify、WordPress 或建站问题`。

@@ -8,6 +8,7 @@ import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import CaseStudyGrid from '~/components/adelie/CaseStudyGrid.astro';
 import CaseDetail from '~/components/adelie/CaseDetail.astro';
+import TeamGrid from '~/components/adelie/TeamGrid.astro';
 
 interface Props {
   body: string;
@@ -87,6 +88,8 @@ const isCaseArchive = /^cases\/[^/]+$/.test(path);
 const isCaseDetail = /^cases\/[^/]+\/[^/]+$/.test(path);
 const isResourceArchive = /^resources\/[^/]+$/.test(path);
 const isResourceDetail = /^resources\/[^/]+\/[^/]+$/.test(path);
+const isTeamPage = path === 'about/team';
+const isAboutPage = /^about\//.test(path);
 const resourceListSection = sections.find(
   (section) => isResourceArchive && /分类与文章列表|工具列表/.test(section.title)
 );
@@ -144,7 +147,9 @@ const visibleSections = sections.filter(
     !(isCaseArchive && /代表案例/.test(section.title)) &&
     !(isResourceArchive && /分类与文章列表|工具列表/.test(section.title))
 );
-const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title);
+const isProcess = (section: Section) =>
+  /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title) ||
+  (path === 'about/process' && /启动|执行|持续/.test(section.title));
 const isFaq = (section: Section) => /FAQ/.test(section.title);
 
 /** 流程页里的“表单提示 / 关键指标”这类备注，提升为区块副标题 */
@@ -246,11 +251,20 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
   )
 }
 
+{isTeamPage && <TeamGrid />}
+
 {
   !isCaseDetail &&
     !isResourceDetail &&
     visibleSections.map((section, index) => {
       const bg = index % 2 === 1 ? altBg : undefined;
+      const aboutIcon = !isAboutPage
+        ? undefined
+        : /原则/.test(section.title)
+          ? 'tabler:check'
+          : /平台|认证|伙伴/.test(section.title)
+            ? 'tabler:shield-check'
+            : 'tabler:users-group';
       return isFaq(section) ? (
         <FAQs title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
       ) : isProcess(section) ? (
@@ -267,6 +281,7 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
           subtitle={section.subtitle}
           items={section.items}
           columns={section.items.length > 3 ? 3 : 2}
+          defaultIcon={aboutIcon}
           bg={bg}
         />
       );
