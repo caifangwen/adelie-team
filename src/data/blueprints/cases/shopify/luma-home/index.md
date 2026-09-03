@@ -1,6 +1,7 @@
 # 案例详情：Luma Home Shopify 转化优化
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
 - 标签：`家居生活｜Shopify 改版｜CRO`
 - 标题：`让移动端用户更快理解产品，也更容易完成购买。`
 - 成果：`移动端转化率 +32%`、`结账前流失下降`。

@@ -1,6 +1,7 @@
 # 案例详情：Arden Tools Google Ads 重构
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1519389950473-47ba0277781c`
 - 标签：`B2B｜Google Search｜转化追踪`
 - 标题：`先让每一条线索被正确记录，再谈扩大广告预算。`
 - 成果：`有效线索成本 -24%`、`无效搜索词消耗下降`。

@@ -6,11 +6,13 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
+import CaseStudyGrid from '~/components/adelie/CaseStudyGrid.astro';
+import CaseDetail from '~/components/adelie/CaseDetail.astro';
 
 interface Props {
   body: string;
   path: string;
-  children?: Array<{ title: string; path: string }>;
+  children?: Array<{ title: string; path: string; body: string }>;
 }
 
 type Item = { title: string; description?: string };
@@ -76,6 +78,27 @@ const heroSubtitle =
   heroValue(/正文|摘要|辅助说明/)?.description || hero?.items.find((item) => item.description)?.description;
 const heroTagline = heroValue(/眉题/)?.description || path.split('/')[0]?.toUpperCase();
 const heroImage = hero?.image;
+const isCaseArchive = /^cases\/[^/]+$/.test(path);
+const isCaseDetail = /^cases\/[^/]+\/[^/]+$/.test(path);
+const caseMetrics = (heroValue(/成果/)?.description ?? '')
+  .split(/[、，,]/)
+  .map(clean)
+  .filter(Boolean);
+const caseNotice = heroValue(/注/)?.description;
+const caseCards = children.map((child) => {
+  const value = (label: RegExp) => {
+    const line = child.body.split('\n').find((line) => /^-\s+/.test(line) && label.test(line));
+    return line ? itemFrom(line.replace(/^-\s+/, '')).description : undefined;
+  };
+  return {
+    title: clean(child.title.replace(/^案例详情：/, '')),
+    path: child.path,
+    tagline: value(/标签/),
+    description: value(/标题/),
+    image: value(/^(图片|配图|主图)/),
+    metrics: (value(/成果/) ?? '').split(/[、，,]/).map(clean).filter(Boolean),
+  };
+});
 const action = heroValue(/按钮|下载|获取|申请/);
 const ctaSection = sections.find((section) => /CTA/.test(section.title));
 const ctaAction = ctaSection?.items.find((item) => /按钮/.test(item.title));
@@ -83,7 +106,8 @@ const visibleSections = sections.filter(
   (section) =>
     !section.title.includes('Hero') &&
     !section.title.includes('Article Header') &&
-    !/Header|Footer|CTA/.test(section.title)
+    !/Header|Footer|CTA/.test(section.title) &&
+    !(isCaseArchive && /代表案例/.test(section.title))
 );
 const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title);
 const isFaq = (section: Section) => /FAQ/.test(section.title);
@@ -106,7 +130,17 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
 ---
 
 {
-  heroImage ? (
+  isCaseDetail ? (
+    <CaseDetail
+      title={heroTitle}
+      tagline={heroValue(/标签/)?.description}
+      subtitle={heroSubtitle}
+      image={heroImage}
+      metrics={caseMetrics}
+      notice={caseNotice}
+      sections={visibleSections}
+    />
+  ) : heroImage ? (
     <section class="relative md:-mt-[76px] not-prose">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
@@ -162,7 +196,7 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
 }
 
 {
-  visibleSections.map((section, index) => {
+  !isCaseDetail && visibleSections.map((section, index) => {
     const bg = index % 2 === 1 ? altBg : undefined;
     return isFaq(section) ? (
       <FAQs title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
@@ -187,7 +221,10 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
 }
 
 {
-  children.length > 0 && (
+  isCaseArchive && caseCards.length > 0 ? (
+    <CaseStudyGrid items={caseCards} />
+  ) : (
+    !isCaseDetail && children.length > 0 && (
     <Features
       title="相关内容"
       items={children.map((child) => ({
@@ -197,10 +234,11 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       }))}
       columns={children.length > 3 ? 3 : 2}
     />
+    )
   )
 }
 
-<CallToAction
+{!isCaseDetail && <CallToAction
   title={clean(ctaSection?.items.find((item) => /标题/.test(item.title))?.description ?? '') ||
     '先从一次增长诊断开始'}
   subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
@@ -211,4 +249,4 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       href: '/contact',
     },
   ]}
-/>
+/>}

@@ -20,6 +20,7 @@ export async function getStaticPaths() {
       .map((child) => ({
         path: `/${pathFromId(child.id)}`,
         title: child.body?.match(/^#\s+(.+)$/m)?.[1] ?? pathFromId(child.id),
+        body: child.body ?? '',
       }));
     return { params: { blueprint: pathname || undefined }, props: { page, children } };
   });

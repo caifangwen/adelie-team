@@ -1,0 +1,63 @@
+---
+import Image from '~/components/common/Image.astro';
+
+interface CaseStudy {
+  title: string;
+  path: string;
+  tagline?: string;
+  description?: string;
+  image?: string;
+  metrics: string[];
+}
+
+interface Props {
+  title?: string;
+  items: CaseStudy[];
+}
+
+const { title = '代表案例', items } = Astro.props;
+---
+
+<section class="relative not-prose scroll-mt-[72px]">
+  <div class="absolute inset-0 -z-[1] bg-secondary/5 dark:bg-white/5"></div>
+  <div class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
+    <h2 class="mb-8 text-center text-3xl font-bold tracking-tighter md:mb-12 md:text-4xl">{title}</h2>
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      {
+        items.map((item) => (
+          <a
+            href={item.path}
+            class="group block overflow-hidden border-2 border-black bg-page shadow-[6px_6px_0_#18181b] transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] dark:hover:shadow-[10px_10px_0_#fff]"
+          >
+            {item.image && (
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={800}
+                height={450}
+                widths={[400, 800]}
+                layout="full-width"
+                class="aspect-video w-full object-cover"
+              />
+            )}
+            <div class="p-6">
+              {item.tagline && (
+                <p class="mb-3 text-sm font-bold tracking-wide text-primary uppercase">{item.tagline}</p>
+              )}
+              <h3 class="text-2xl font-bold group-hover:text-primary">{item.title}</h3>
+              {item.description && <p class="mt-3 text-muted">{item.description}</p>}
+              {item.metrics.length > 0 && (
+                <ul class="mt-5 flex flex-wrap gap-2" aria-label={`${item.title} 成果`}>
+                  {item.metrics.map((metric) => (
+                    <li class="border border-black bg-accent px-2 py-1 text-sm font-bold text-black">{metric}</li>
+                  ))}
+                </ul>
+              )}
+              <span class="mt-6 inline-block font-semibold underline underline-offset-4">查看案例 →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
