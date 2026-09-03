@@ -4,6 +4,8 @@ import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
 
 interface Props {
   body: string;
@@ -12,7 +14,8 @@ interface Props {
 }
 
 type Item = { title: string; description?: string };
-type Section = { title: string; items: Item[] };
+type SectionImage = { src: string; alt: string };
+type Section = { title: string; subtitle?: string; image?: SectionImage; items: Item[] };
 
 const { body, path, children = [] } = Astro.props;
 
@@ -31,18 +34,37 @@ const itemFrom = (line: string): Item => {
   return { title: clean(text.slice(0, divider)), description: clean(text.slice(divider + 1)) };
 };
 
+/** 抽取“图片”行并移除出条目列表，返回图片地址（description 为空时从 title 里剥离前缀） */
+const takeImage = (items: Item[], alt: string): { rest: Item[]; image?: SectionImage } => {
+  const index = items.findIndex((item) => /^(图片|配图|主图)/.test(item.title));
+  if (index < 0) return { rest: items };
+
+  const item = items[index];
+  const src = item.description || item.title.replace(/^(图片|配图|主图)[:：]?/, '').trim();
+  return {
+    rest: items.filter((_, i) => i !== index),
+    image: src ? { src, alt } : undefined,
+  };
+};
+
 const title = clean(body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie');
 const sections: Section[] = body
   .split(/^##\s+/m)
   .slice(1)
   .map((block) => {
     const [heading = '', ...lines] = block.split('\n');
+    const subtitle = clean(lines.filter((line) => /^>\s?/.test(line)).join(' ').replaceAll(/^>\s?/g, ''));
+    const rawItems = lines
+      .filter((line) => /^-\s+/.test(line))
+      .map((line) => itemFrom(line.replace(/^-\s+/, '')))
+      .filter((item) => item.title && !/^(组件|Footer)/.test(item.title));
+    const sectionTitle = clean(heading.replace(/^\d+\.\s*/, ''));
+    const { rest, image } = takeImage(rawItems, sectionTitle);
     return {
-      title: clean(heading.replace(/^\d+\.\s*/, '')),
-      items: lines
-        .filter((line) => /^-\s+/.test(line))
-        .map((line) => itemFrom(line.replace(/^-\s+/, '')))
-        .filter((item) => item.title && !/^(组件|Footer)/.test(item.title)),
+      title: sectionTitle,
+      subtitle: subtitle || undefined,
+      image,
+      items: rest,
     };
   })
   .filter((section) => section.items.length > 0);
@@ -53,34 +75,115 @@ const heroTitle = heroValue(/标题/)?.description || title;
 const heroSubtitle =
   heroValue(/正文|摘要|辅助说明/)?.description || hero?.items.find((item) => item.description)?.description;
 const heroTagline = heroValue(/眉题/)?.description || path.split('/')[0]?.toUpperCase();
+const heroImage = hero?.image;
 const action = heroValue(/按钮|下载|获取|申请/);
+const ctaSection = sections.find((section) => /CTA/.test(section.title));
+const ctaAction = ctaSection?.items.find((item) => /按钮/.test(item.title));
 const visibleSections = sections.filter(
   (section) =>
     !section.title.includes('Hero') &&
     !section.title.includes('Article Header') &&
     !/Header|Footer|CTA/.test(section.title)
 );
-const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录/.test(section.title);
+const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title);
 const isFaq = (section: Section) => /FAQ/.test(section.title);
+
+/** 流程页里的“表单提示 / 关键指标”这类备注，提升为区块副标题 */
+const isFlowNote = (item: Item) => /提示|指标|备注|说明/.test(item.title) && !!item.description;
+
+/** 把 “A → B → C” 箭头流程拆成逐步的步骤 */
+const flowItems = (items: Item[]): Item[] =>
+  items.flatMap((item) =>
+    item.title.includes('→') ? item.title.split('→').map((stage) => ({ title: clean(stage) })) : [item]
+  );
+
+const flowSubtitle = (section: Section): string | undefined => {
+  const note = section.items.filter(isFlowNote).map((item) => `${item.title}：${item.description}`).join(' ');
+  return [section.subtitle, note].filter(Boolean).join(' ') || undefined;
+};
+
+const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></div>';
 ---
 
-<HeroText
-  title={heroTitle}
-  subtitle={heroSubtitle}
-  tagline={heroTagline}
-  callToAction={action ? { variant: 'primary', text: action.description || action.title, href: '/contact' } : undefined}
-/>
+{
+  heroImage ? (
+    <section class="relative md:-mt-[76px] not-prose">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+        <div class="py-12 md:py-20">
+          <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+            <div>
+              {heroTagline && (
+                <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+                  {heroTagline}
+                </p>
+              )}
+              <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+                {heroTitle}
+              </h1>
+              {heroSubtitle && (
+                <p class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+                  {heroSubtitle}
+                </p>
+              )}
+              {action && (
+                <div class="flex flex-col sm:flex-row gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+                  <Button variant="primary" text={action.description || action.title} href="/contact" class="w-full sm:w-auto" />
+                </div>
+              )}
+            </div>
+            <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <Image
+                src={heroImage.src}
+                alt={heroImage.alt}
+                width={1200}
+                height={675}
+                widths={[400, 768, 1200]}
+                layout="full-width"
+                class="w-full border-2 border-black shadow-[8px_8px_0_#18181b] dark:border-white dark:shadow-[8px_8px_0_#fff]"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <HeroText
+      title={heroTitle}
+      subtitle={heroSubtitle}
+      tagline={heroTagline}
+      callToAction={
+        action ? { variant: 'primary', text: action.description || action.title, href: '/contact' } : undefined
+      }
+    />
+  )
+}
 
 {
-  visibleSections.map((section, index) =>
-    isFaq(section) ? (
-      <FAQs title={section.title} items={section.items} />
+  visibleSections.map((section, index) => {
+    const bg = index % 2 === 1 ? altBg : undefined;
+    return isFaq(section) ? (
+      <FAQs title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
     ) : isProcess(section) ? (
-      <Steps title={section.title} items={section.items} isReversed={index % 2 === 1} />
+      <Steps
+        title={section.title}
+        subtitle={flowSubtitle(section)}
+        items={flowItems(section.items.filter((item) => !isFlowNote(item)))}
+        image={section.image}
+        bg={bg}
+      />
     ) : (
-      <Features title={section.title} items={section.items} columns={section.items.length > 3 ? 3 : 2} />
-    )
-  )
+      <Features
+        title={section.title}
+        subtitle={section.subtitle}
+        items={section.items}
+        columns={section.items.length > 3 ? 3 : 2}
+        bg={bg}
+      />
+    );
+  })
 }
 
 {
@@ -98,7 +201,14 @@ const isFaq = (section: Section) => /FAQ/.test(section.title);
 }
 
 <CallToAction
-  title="先从一次增长诊断开始"
+  title={clean(ctaSection?.items.find((item) => /标题/.test(item.title))?.description ?? '') ||
+    '先从一次增长诊断开始'}
   subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
-  actions={[{ variant: 'primary', text: '联系 Adelie', href: '/contact' }]}
+  actions={[
+    {
+      variant: 'primary',
+      text: clean(ctaAction?.description ?? '') || ctaAction?.title || '联系 Adelie',
+      href: '/contact',
+    },
+  ]}
 />

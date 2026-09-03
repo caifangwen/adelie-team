@@ -5,6 +5,7 @@ export interface ServicePageData {
   title: string;
   subtitle: string;
   action: string;
+  image?: { src: string; alt: string };
   problemsTitle: string;
   problems: Array<{ title: string; description: string; icon: string }>;
   deliverablesTitle: string;
@@ -25,6 +26,10 @@ export const services: ServicePageData[] = [
     subtitle:
       '从信息架构到 WordPress 开发，我们把复杂的产品、能力与案例整理成海外客户看得懂、搜索得到、愿意联系的内容。',
     action: '获取建站方案',
+    image: {
+      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
+      alt: 'WordPress 建站',
+    },
     problemsTitle: '你可能正遇到这些问题',
     problems: [
       {
@@ -116,6 +121,10 @@ export const services: ServicePageData[] = [
     title: '把品牌体验做进每一次点击与结账。',
     subtitle: '我们为 DTC 品牌和跨境卖家打造 Shopify 商店，让产品价值、购物体验和广告落地页共同服务于转化。',
     action: '获取 Shopify 方案',
+    image: {
+      src: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc',
+      alt: 'Shopify 独立站',
+    },
     problemsTitle: '不只是换一套主题',
     problems: [
       {
@@ -214,6 +223,10 @@ export const services: ServicePageData[] = [
     subtitle:
       'SEO 不是堆关键词。我们从真实搜索需求出发，修好技术基础，建设能帮助决策的页面和内容，再用数据验证它是否带来业务机会。',
     action: '申请 SEO 初步诊断',
+    image: {
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
+      alt: 'SEO 自然流量增长',
+    },
     problemsTitle: '先诊断，再承诺',
     problems: [
       {
@@ -311,6 +324,10 @@ export const services: ServicePageData[] = [
     title: '每一笔广告预算，都应该有清晰去向。',
     subtitle: '从账户结构、关键词与创意，到转化追踪和落地页，我们用完整的获客链路判断广告是否真的有效。',
     action: '申请账户诊断',
+    image: {
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
+      alt: 'Google Ads 投放',
+    },
     problemsTitle: '常见投放症状',
     problems: [
       {
@@ -405,6 +422,10 @@ export const services: ServicePageData[] = [
     subtitle:
       '当建站、SEO 和广告由不同团队分别推进，常常会得到一个漂亮的网站和一份无法转化的流量报表。我们把它们放进同一份增长计划。',
     action: '规划我的增长方案',
+    image: {
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984',
+      alt: '整站增长方案',
+    },
     problemsTitle: '一条完整增长链路',
     problems: [
       {

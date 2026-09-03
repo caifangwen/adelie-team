@@ -5,6 +5,7 @@
 - 标题：`让有需求的客户，更早找到你。`
 - 正文：`SEO 不是堆关键词。我们从真实搜索需求出发，修好技术基础，建设能帮助决策的页面和内容，再用数据验证它是否带来业务机会。`
 - 按钮：`申请 SEO 初步诊断`。
+- 图片：`https://images.unsplash.com/photo-1551288049-bebda4e38f71`
 - 组件：`SiteHeader`、`ServiceHero`、`PrimaryButton`。
 
 ## 02. 先诊断，再承诺
@@ -27,6 +28,7 @@
 - `第 2–3 月`：`上线核心商业页面和首批内容，持续解决技术问题。`
 - `第 4 月起`：`根据排名、流量和转化持续扩展与优化。`
 - 注：`SEO 的周期因行业、站点基础和竞争程度而异；不承诺具体排名。`
+- 图片：`https://images.unsplash.com/photo-1460925895917-afdab827c52f`
 - 组件：`Timeline`、`TimelineItem`、`Notice`。
 
 ## 05. 案例 + CTA

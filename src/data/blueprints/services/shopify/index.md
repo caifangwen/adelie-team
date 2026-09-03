@@ -5,6 +5,7 @@
 - 标题：`把品牌体验做进每一次点击与结账。`
 - 正文：`我们为 DTC 品牌和跨境卖家打造 Shopify 商店，让产品价值、购物体验和广告落地页共同服务于转化。`
 - 按钮：`获取 Shopify 方案`；次按钮：`查看电商案例`。
+- 图片：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
 - 组件：`SiteHeader`、`ServiceHero`、`PrimaryButton`、`SecondaryButton`。
 
 ## 02. 不只是换一套主题
