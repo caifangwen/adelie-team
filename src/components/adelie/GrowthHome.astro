@@ -1,0 +1,350 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+
+const services = [
+  ['01', '高转化网站', 'WordPress 与 Shopify 网站，把品牌、产品与决策路径说清楚。', 'tabler:layout-dashboard'],
+  ['02', '搜索增长', '技术 SEO、内容架构与关键词地图，覆盖真正有业务价值的搜索。', 'tabler:search'],
+  ['03', 'Google Ads', '把预算、搜索词、落地页与线索质量放到同一套判断系统。', 'tabler:chart-line'],
+  ['04', '增长系统', '把网站、内容、投放和销售反馈连成可持续优化的闭环。', 'tabler:git-merge'],
+];
+
+const system = [
+  ['Search', 'tabler:search'],
+  ['Content / Ads', 'tabler:sparkles'],
+  ['Landing Page', 'tabler:layout-dashboard'],
+  ['Proof', 'tabler:shield-check'],
+  ['Lead', 'tabler:file-text'],
+  ['CRM', 'tabler:database'],
+];
+
+const insights = [
+  {
+    category: 'SEO PLAYBOOK',
+    title: 'B2B 外贸网站的关键词地图，应该如何开始？',
+    href: '/resources/seo/b2b-keyword-map',
+    cover: 'bg-[#5da2cf]',
+    mark: '01',
+  },
+  {
+    category: 'ADS DIAGNOSTIC',
+    title: 'Google Ads 有点击没询盘，先检查这 5 个环节',
+    href: '/resources/ads/no-leads-audit',
+    cover: 'bg-[#49b9ae]',
+    mark: '02',
+  },
+  {
+    category: 'WEBSITE GUIDE',
+    title: '网站改版前，怎样收集内容才不会拖慢上线？',
+    href: '/resources/wordpress-shopify/website-redesign-brief',
+    cover: 'bg-[#f7bb4e]',
+    mark: '03',
+  },
+];
+---
+
+<section class="relative overflow-hidden">
+  <div
+    class="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:py-28"
+  >
+    <div>
+      <p class="mb-5 text-sm font-bold tracking-[0.16em] text-primary">GROWTH, BUILT AS A SYSTEM</p>
+      <h1 class="max-w-3xl font-heading text-5xl font-bold leading-[0.98] tracking-[-0.055em] md:text-7xl lg:text-8xl">
+        不只做网站，<br />
+        更建立增长系统。
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-8 text-muted md:text-xl">
+        把 Website、SEO、Google Ads 与销售线索放进同一条可衡量、可优化的增长路径。
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <Button variant="primary" text="免费增长诊断" href="/contact" class="justify-center" />
+        <Button variant="tertiary" text="查看案例 →" href="/cases/wordpress" class="justify-center" />
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
+      <div
+        class="relative overflow-hidden border-2 border-black bg-[#c8ed34] p-5 text-black shadow-[12px_12px_0_#18181b] dark:border-white md:p-7"
+      >
+        <div
+          class="flex items-center justify-between border-b border-black/25 pb-4 text-xs font-bold tracking-[0.16em] text-black/65"
+        >
+          <span>GROWTH SYSTEM</span><span>LIVE VIEW</span>
+        </div>
+        <div class="grid gap-3 py-7 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+          <div class="border-2 border-black bg-page p-4">
+            <span class="text-xs text-black/60">ACQUISITION</span>
+            <p class="mt-2 text-2xl font-bold">Website</p>
+          </div>
+          <Icon name="tabler:arrow-right" class="mx-auto h-6 w-6 sm:rotate-0" />
+          <div class="border-2 border-black bg-[#49b9ae] p-4">
+            <span class="text-xs text-black/60">DEMAND</span>
+            <p class="mt-2 text-2xl font-bold">SEO / Ads</p>
+          </div>
+        </div>
+        <div class="border-2 border-black bg-[#d65861] px-5 py-4 text-black">
+          <div class="flex items-center justify-between gap-4">
+            <span class="font-bold">Qualified leads</span><strong class="text-3xl">→</strong>
+          </div>
+          <div class="mt-3 h-2 w-full bg-black/15"><div class="h-full w-3/4 bg-black"></div></div>
+        </div>
+      </div>
+      <p class="mt-4 text-right text-xs font-bold tracking-[0.14em] text-muted">WEBSITE → SEO → ADS → LEADS</p>
+    </div>
+  </div>
+</section>
+
+<section class="border-y-2 border-black py-4 text-black dark:border-white">
+  <div
+    class="mx-auto flex max-w-7xl items-center gap-x-8 gap-y-2 overflow-x-auto px-4 text-sm font-bold tracking-[0.08em] whitespace-nowrap md:px-6"
+  >
+    <span class="bg-[#c8ed34] px-3 py-2 text-black">TRUSTED TOOLKIT</span><span>WORDPRESS</span><span>SHOPIFY</span
+    ><span>GA4</span><span>GOOGLE ADS</span><span>GTM</span><span>SEARCH CONSOLE</span>
+  </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+  <div class="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-20">
+    <div class="lg:sticky lg:top-28 lg:self-start">
+      <p class="text-sm font-bold tracking-[0.16em] text-primary">WHAT WE DO</p>
+      <h2 class="mt-4 font-heading text-4xl font-bold leading-[1.02] tracking-[-0.045em] md:text-6xl">
+        不是四项服务，<br />是一套增长协作方式。
+      </h2>
+      <p class="mt-6 max-w-sm text-muted">每一个动作都连接到同一个业务目标：获得更高质量的询盘与订单。</p>
+    </div>
+    <div class="divide-y-2 divide-black border-y-2 border-black dark:divide-white dark:border-white">
+      {
+        services.map(([number, title, description, icon]) => (
+          <article class="group grid gap-4 py-7 sm:grid-cols-[4rem_1fr_auto] sm:items-center sm:gap-6">
+            <span class="font-bold text-primary">{number}</span>
+            <div>
+              <h3 class="text-3xl font-bold tracking-tight md:text-4xl">{title}</h3>
+              <p class="mt-2 max-w-xl text-muted">{description}</p>
+            </div>
+            <Icon
+              name={icon}
+              class="h-9 w-9 text-secondary transition-transform group-hover:rotate-[-8deg] group-hover:scale-110 dark:text-white"
+            />
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="py-20 md:py-28">
+  <div
+    class="mx-4 grid max-w-7xl gap-10 bg-[#7632ed] p-6 text-white md:mx-auto md:p-10 lg:grid-cols-[.78fr_1.22fr] lg:items-end"
+  >
+    <div>
+      <p class="text-sm font-bold tracking-[0.16em] text-[#c8ed34]">FEATURED CASE</p>
+      <h2 class="mt-4 font-heading text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+        让技术资料，变成销售能使用的海外官网。
+      </h2>
+      <p class="mt-6 max-w-md text-white/70">
+        NovaTech 工业官网重构：重组产品、行业和应用信息，建立统一询盘入口与 SEO 基础。
+      </p>
+      <div class="mt-9 flex items-end gap-5">
+        <strong class="text-7xl leading-none text-[#c8ed34] md:text-8xl">+68%</strong><span
+          class="pb-1 text-sm font-bold tracking-wide">QUALIFIED<br />ENQUIRIES</span
+        >
+      </div>
+      <a
+        class="mt-8 inline-flex font-bold underline underline-offset-4 hover:text-[#c8ed34]"
+        href="/cases/wordpress/novatech">阅读完整案例 →</a
+      >
+    </div>
+    <div class="relative border-2 border-black bg-page p-3 shadow-[10px_10px_0_#18181b] md:p-5">
+      <div class="flex h-5 gap-1.5 border-b border-black/15 pb-2">
+        <i class="h-2 w-2 rounded-full bg-[#d65861]"></i><i class="h-2 w-2 rounded-full bg-[#c8ed34]"></i><i
+          class="h-2 w-2 rounded-full bg-black/20"></i>
+      </div>
+      <div class="grid min-h-72 gap-4 py-5 sm:grid-cols-[.38fr_.62fr]">
+        <div class="bg-[#49b9ae] p-4">
+          <p class="text-xs font-bold">NOVATECH</p><div class="mt-5 h-3 w-4/5 bg-black"></div><div
+            class="mt-2 h-3 w-3/5 bg-black/35"
+          >
+          </div><div class="mt-10 border-2 border-black px-3 py-2 text-xs font-bold">GET A QUOTE</div>
+        </div>
+        <div class="relative overflow-hidden bg-[#f7bb4e] p-5 text-black">
+          <span class="text-xs font-bold tracking-wider">INDUSTRIAL SOLUTIONS</span><div
+            class="absolute bottom-0 right-0 h-3/5 w-3/5 border-l-2 border-t-2 border-black bg-page/90 p-4"
+          >
+            <div class="h-3 w-full bg-black"></div><div class="mt-3 h-3 w-3/4 bg-black/35"></div><div
+              class="mt-7 h-16 border-2 border-secondary"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 md:py-28">
+  <div class="mx-4 max-w-7xl border-2 border-black bg-[#c8ed34] p-6 text-black md:mx-auto md:p-10 dark:border-white">
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold tracking-[0.16em]">GROWTH SYSTEM</p><h2
+        class="mt-4 font-heading text-4xl font-bold leading-tight tracking-tight md:text-6xl"
+      >
+        每一次访问，都应该知道下一步去哪里。
+      </h2>
+    </div>
+    <div class="mt-12 grid gap-3 md:grid-cols-6 md:items-stretch">
+      {
+        system.map(([label, icon], index) => (
+          <div class="relative flex min-h-28 items-center gap-3 border-2 border-black bg-page p-4 md:block md:min-h-44">
+            <Icon name={icon} class="h-6 w-6 md:h-7 md:w-7" />
+            <p class="font-bold md:mt-8">{label}</p>
+            {index < system.length - 1 && (
+              <Icon
+                name="tabler:arrow-down"
+                class="absolute -bottom-5 left-1/2 z-10 h-5 w-5 -translate-x-1/2 md:-right-5 md:bottom-auto md:left-auto md:top-1/2 md:-translate-y-1/2 md:rotate-[-90deg]"
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto grid max-w-7xl gap-5 px-4 py-20 md:px-6 md:py-28 lg:grid-cols-2">
+  <a
+    href="/solutions/b2b-export"
+    class="group relative min-h-[30rem] overflow-hidden bg-[#5da2cf] p-7 text-black md:p-10"
+  >
+    <span class="text-sm font-bold tracking-[0.16em]">B2B / EXPORT</span><h2
+      class="mt-5 max-w-md font-heading text-5xl font-bold leading-none tracking-tight"
+    >
+      把复杂业务，讲成值得询盘的证据。
+    </h2><p class="mt-6 max-w-sm text-black/70">产品、应用、规格、案例与销售入口，形成面向采购决策的海外获客站。</p>
+    <div class="absolute bottom-0 right-0 h-48 w-3/4 border-l border-t border-black/35 p-5">
+      <div class="h-4 w-2/3 bg-[#c8ed34]"></div><div class="mt-4 h-20 border border-black/50"></div>
+    </div><span class="absolute bottom-8 left-7 font-bold underline underline-offset-4 md:left-10">探索 B2B 方案 →</span
+    >
+  </a>
+  <a
+    href="/solutions/dtc-brand"
+    class="group relative min-h-[30rem] overflow-hidden bg-[#d65861] p-7 text-black md:p-10"
+  >
+    <span class="text-sm font-bold tracking-[0.16em]">DTC / BRAND</span><h2
+      class="mt-5 max-w-md font-heading text-5xl font-bold leading-none tracking-tight"
+    >
+      把品牌偏好，落到每一步购买动作。
+    </h2><p class="mt-6 max-w-sm text-black/70">从 Shopify 商店、商品页到广告落地页，减少犹豫，让流量更容易成交。</p>
+    <div class="absolute -bottom-12 right-0 h-64 w-64 rounded-full border-[28px] border-[#c8ed34]"></div><div
+      class="absolute bottom-14 right-12 h-24 w-40 rotate-[-8deg] border-2 border-black bg-page p-3"
+    >
+      <div class="h-3 w-2/3 bg-black"></div><div class="mt-4 h-10 border border-black"></div>
+    </div><span class="absolute bottom-8 left-7 font-bold underline underline-offset-4 md:left-10">探索 DTC 方案 →</span
+    >
+  </a>
+</section>
+
+<section class="border-y-2 border-black py-20 dark:border-white md:py-28">
+  <div class="mx-auto max-w-7xl px-4 md:px-6">
+    <p class="text-sm font-bold tracking-[0.16em] text-primary">CASE RESULTS</p><div
+      class="mt-8 grid gap-6 sm:grid-cols-3"
+    >
+      <div>
+        <strong class="text-6xl font-bold tracking-tighter md:text-8xl">+68%</strong><p class="mt-3 font-bold">
+          Qualified enquiries
+        </p>
+      </div><div>
+        <strong class="text-6xl font-bold tracking-tighter md:text-8xl">+41%</strong><p class="mt-3 font-bold">
+          Engagement
+        </p>
+      </div><div>
+        <strong class="text-6xl font-bold tracking-tighter md:text-8xl">+32%</strong><p class="mt-3 font-bold">
+          Conversion
+        </p>
+      </div>
+    </div><p class="mt-10 text-sm text-muted">示例数据仅用于展示信息结构，发布前以可核验的客户数据替换。</p>
+  </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+  <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+    <div>
+      <p class="text-sm font-bold tracking-[0.16em] text-primary">HOW WE WORK</p><h2
+        class="mt-4 font-heading text-4xl font-bold tracking-tight md:text-6xl"
+      >
+        先看问题，再决定做什么。
+      </h2>
+    </div><p class="max-w-sm text-muted">每一步都有明确输出，先建立判断，再开始投入。</p>
+  </div>
+  <div class="mt-12 grid border-t-2 border-black dark:border-white md:grid-cols-4">
+    {
+      ['诊断现状', '制定优先级', '共同执行', '数据迭代'].map((title, index) => (
+        <div class="border-b-2 border-black py-6 pr-6 dark:border-white md:border-b-0 md:border-r-2 md:px-6 md:first:pl-0 md:last:border-r-0">
+          <>
+            <span class="text-3xl font-bold text-primary">0{index + 1}</span>
+            <h3 class="mt-10 text-2xl font-bold">{title}</h3>
+            <p class="mt-3 text-muted">
+              {
+                [
+                  '了解市场、页面、流量与业务目标。',
+                  '先完成最影响结果的工作。',
+                  '设计、开发、内容与投放协同推进。',
+                  '持续回看数据，调整下一轮动作。',
+                ][index]
+              }
+            </p>
+          </>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<section class="py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-4 md:px-6">
+    <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+      <div>
+        <p class="text-sm font-bold tracking-[0.16em] text-primary">INSIGHTS</p><h2
+          class="mt-4 font-heading text-4xl font-bold tracking-tight md:text-6xl"
+        >
+          真正能用于下一步的洞察。
+        </h2>
+      </div><a class="font-bold underline underline-offset-4 hover:text-primary" href="/resources/seo">查看全部资源 →</a
+      >
+    </div>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {
+        insights.map((insight) => (
+          <a href={insight.href} class="group">
+            <>
+              <div class:list={['relative aspect-[4/3] overflow-hidden p-6 text-black', insight.cover]}>
+                <>
+                  <span class="text-sm font-bold">{insight.category}</span>
+                  <strong class="absolute bottom-4 right-5 text-7xl leading-none text-black/25">{insight.mark}</strong>
+                  <div class="absolute bottom-6 left-6 h-14 w-14 border-2 border-black bg-page/80" />
+                </>
+              </div>
+              <h3 class="mt-5 text-2xl font-bold leading-tight group-hover:text-primary">{insight.title}</h3>
+              <span class="mt-4 inline-block font-bold underline underline-offset-4">阅读文章 →</span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="py-20 md:py-28">
+  <div class="mx-4 max-w-5xl bg-[#7632ed] px-4 py-24 text-center text-white md:mx-auto md:px-6 md:py-32">
+    <p class="text-sm font-bold tracking-[0.2em] text-[#c8ed34]">READY WHEN YOU ARE</p><h2
+      class="mt-6 font-heading text-5xl font-bold leading-[.92] tracking-[-0.06em] md:text-8xl"
+    >
+      YOUR NEXT GROWTH<br />OPPORTUNITY?
+    </h2><p class="mx-auto mt-7 max-w-xl text-lg text-white/75">
+      告诉我们你的业务目标、网站或广告账户。我们会先给出清晰的增长判断，再讨论下一步。
+    </p><Button
+      variant="tertiary"
+      text="免费获取增长诊断 →"
+      href="/contact"
+      class="mt-10 border-2 border-black bg-[#c8ed34] px-7 py-4 text-black hover:bg-page"
+    />
+  </div>
+</section>
