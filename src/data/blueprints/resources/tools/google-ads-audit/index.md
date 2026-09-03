@@ -1,6 +1,7 @@
 # 下载页：Google Ads 账户自查表
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1460925895917-afdab827c52f`
 - 标题：`先找出广告账户最容易浪费预算的地方。`
 - 正文：`用 30 分钟检查转化目标、搜索词、预算分配和落地页承接。`
 - 组件：`SiteHeader`、`DownloadHero`、`PrimaryButton`。

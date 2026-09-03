@@ -1,6 +1,7 @@
 # 下载页：建站需求清单
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1454165804606-c3d57bc86b40`
 - 标题：`把“想做一个新网站”，变成可执行的项目需求。`
 - 正文：`用这份清单整理业务目标、目标市场、页面需求、内容责任和上线标准。`
 - 组件：`SiteHeader`、`DownloadHero`、`PrimaryButton`。

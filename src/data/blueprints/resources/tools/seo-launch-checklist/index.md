@@ -1,6 +1,7 @@
 # 下载页：SEO 上线检查清单
 
 ## 01. Hero
+- 图片：`https://images.unsplash.com/photo-1551288049-bebda4e38f71`
 - 标题：`上线前 30 分钟，避免 SEO 基础错误。`
 - 正文：`适用于新页面、网站改版与迁移后的基础检查。`
 - 组件：`SiteHeader`、`DownloadHero`、`PrimaryButton`。

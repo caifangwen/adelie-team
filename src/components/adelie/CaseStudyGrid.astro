@@ -12,10 +12,11 @@ interface CaseStudy {
 
 interface Props {
   title?: string;
+  actionText?: string;
   items: CaseStudy[];
 }
 
-const { title = '代表案例', items } = Astro.props;
+const { title = '代表案例', actionText = '查看详情', items } = Astro.props;
 ---
 
 <section class="relative not-prose scroll-mt-[72px]">
@@ -53,7 +54,7 @@ const { title = '代表案例', items } = Astro.props;
                   ))}
                 </ul>
               )}
-              <span class="mt-6 inline-block font-semibold underline underline-offset-4">查看案例 →</span>
+              <span class="mt-6 inline-block font-semibold underline underline-offset-4">{actionText} →</span>
             </div>
           </a>
         ))

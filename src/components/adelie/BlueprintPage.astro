@@ -55,7 +55,12 @@ const sections: Section[] = body
   .slice(1)
   .map((block) => {
     const [heading = '', ...lines] = block.split('\n');
-    const subtitle = clean(lines.filter((line) => /^>\s?/.test(line)).join(' ').replaceAll(/^>\s?/g, ''));
+    const subtitle = clean(
+      lines
+        .filter((line) => /^>\s?/.test(line))
+        .join(' ')
+        .replaceAll(/^>\s?/g, '')
+    );
     const rawItems = lines
       .filter((line) => /^-\s+/.test(line))
       .map((line) => itemFrom(line.replace(/^-\s+/, '')))
@@ -80,6 +85,10 @@ const heroTagline = heroValue(/眉题/)?.description || path.split('/')[0]?.toUp
 const heroImage = hero?.image;
 const isCaseArchive = /^cases\/[^/]+$/.test(path);
 const isCaseDetail = /^cases\/[^/]+\/[^/]+$/.test(path);
+const isResourceArchive = /^resources\/[^/]+$/.test(path);
+const isResourceDetail = /^resources\/[^/]+\/[^/]+$/.test(path);
+const resourceGridTitle = path.endsWith('/tools') ? '工具与下载资料' : '最新文章';
+const resourceActionText = path.endsWith('/tools') ? '查看清单' : '阅读文章';
 const caseMetrics = (heroValue(/成果/)?.description ?? '')
   .split(/[、，,]/)
   .map(clean)
@@ -96,7 +105,24 @@ const caseCards = children.map((child) => {
     tagline: value(/标签/),
     description: value(/标题/),
     image: value(/^(图片|配图|主图)/),
-    metrics: (value(/成果/) ?? '').split(/[、，,]/).map(clean).filter(Boolean),
+    metrics: (value(/成果/) ?? '')
+      .split(/[、，,]/)
+      .map(clean)
+      .filter(Boolean),
+  };
+});
+const resourceCards = children.map((child) => {
+  const value = (label: RegExp) => {
+    const line = child.body.split('\n').find((line) => /^-\s+/.test(line) && label.test(line));
+    return line ? itemFrom(line.replace(/^-\s+/, '')).description : undefined;
+  };
+  return {
+    title: clean(value(/标题/) || child.title.replace(/^(文章详情|下载页)：/, '')),
+    path: child.path,
+    tagline: value(/分类/) || '实用资源',
+    description: value(/摘要|正文/) || undefined,
+    image: value(/^(图片|配图|主图)/),
+    metrics: [],
   };
 });
 const action = heroValue(/按钮|下载|获取|申请/);
@@ -122,7 +148,10 @@ const flowItems = (items: Item[]): Item[] =>
   );
 
 const flowSubtitle = (section: Section): string | undefined => {
-  const note = section.items.filter(isFlowNote).map((item) => `${item.title}：${item.description}`).join(' ');
+  const note = section.items
+    .filter(isFlowNote)
+    .map((item) => `${item.title}：${item.description}`)
+    .join(' ');
   return [section.subtitle, note].filter(Boolean).join(' ') || undefined;
 };
 
@@ -130,20 +159,28 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
 ---
 
 {
-  isCaseDetail ? (
+  isCaseDetail || isResourceDetail ? (
     <CaseDetail
       title={heroTitle}
-      tagline={heroValue(/标签/)?.description}
+      tagline={heroValue(/标签|分类/)?.description || (isResourceDetail ? '实用资源' : undefined)}
       subtitle={heroSubtitle}
       image={heroImage}
-      metrics={caseMetrics}
-      notice={caseNotice}
+      metrics={isCaseDetail ? caseMetrics : []}
+      notice={isCaseDetail ? caseNotice : undefined}
       sections={visibleSections}
+      ctaTitle={
+        isResourceDetail
+          ? clean(ctaSection?.items.find((item) => /标题|文案/.test(item.title))?.description ?? '') ||
+            '需要进一步梳理优先级？'
+          : undefined
+      }
+      ctaSubtitle={isResourceDetail ? '把资源中的检查项应用到你的站点、内容或广告账户后，再决定下一步。' : undefined}
+      ctaAction={isResourceDetail ? '获取初步建议' : undefined}
     />
   ) : heroImage ? (
     <section class="relative md:-mt-[76px] not-prose">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+        <div class="pt-0 md:pt-[76px] pointer-events-none" />
         <div class="py-12 md:py-20">
           <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <div>
@@ -162,7 +199,12 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
               )}
               {action && (
                 <div class="flex flex-col sm:flex-row gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-                  <Button variant="primary" text={action.description || action.title} href="/contact" class="w-full sm:w-auto" />
+                  <Button
+                    variant="primary"
+                    text={action.description || action.title}
+                    href="/contact"
+                    class="w-full sm:w-auto"
+                  />
                 </div>
               )}
             </div>
@@ -196,57 +238,68 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
 }
 
 {
-  !isCaseDetail && visibleSections.map((section, index) => {
-    const bg = index % 2 === 1 ? altBg : undefined;
-    return isFaq(section) ? (
-      <FAQs title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
-    ) : isProcess(section) ? (
-      <Steps
-        title={section.title}
-        subtitle={flowSubtitle(section)}
-        items={flowItems(section.items.filter((item) => !isFlowNote(item)))}
-        image={section.image}
-        bg={bg}
-      />
-    ) : (
-      <Features
-        title={section.title}
-        subtitle={section.subtitle}
-        items={section.items}
-        columns={section.items.length > 3 ? 3 : 2}
-        bg={bg}
-      />
-    );
-  })
+  !isCaseDetail &&
+    !isResourceDetail &&
+    visibleSections.map((section, index) => {
+      const bg = index % 2 === 1 ? altBg : undefined;
+      return isFaq(section) ? (
+        <FAQs title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
+      ) : isProcess(section) ? (
+        <Steps
+          title={section.title}
+          subtitle={flowSubtitle(section)}
+          items={flowItems(section.items.filter((item) => !isFlowNote(item)))}
+          image={section.image}
+          bg={bg}
+        />
+      ) : (
+        <Features
+          title={section.title}
+          subtitle={section.subtitle}
+          items={section.items}
+          columns={section.items.length > 3 ? 3 : 2}
+          bg={bg}
+        />
+      );
+    })
 }
 
 {
   isCaseArchive && caseCards.length > 0 ? (
-    <CaseStudyGrid items={caseCards} />
+    <CaseStudyGrid items={caseCards} actionText="查看案例" />
+  ) : isResourceArchive && resourceCards.length > 0 ? (
+    <CaseStudyGrid title={resourceGridTitle} actionText={resourceActionText} items={resourceCards} />
   ) : (
-    !isCaseDetail && children.length > 0 && (
-    <Features
-      title="相关内容"
-      items={children.map((child) => ({
-        title: child.title,
-        icon: 'tabler:arrow-up-right',
-        callToAction: { text: '查看详情', href: child.path },
-      }))}
-      columns={children.length > 3 ? 3 : 2}
-    />
+    !isCaseDetail &&
+    !isResourceDetail &&
+    children.length > 0 && (
+      <Features
+        title="相关内容"
+        items={children.map((child) => ({
+          title: child.title,
+          icon: 'tabler:arrow-up-right',
+          callToAction: { text: '查看详情', href: child.path },
+        }))}
+        columns={children.length > 3 ? 3 : 2}
+      />
     )
   )
 }
 
-{!isCaseDetail && <CallToAction
-  title={clean(ctaSection?.items.find((item) => /标题/.test(item.title))?.description ?? '') ||
-    '先从一次增长诊断开始'}
-  subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
-  actions={[
-    {
-      variant: 'primary',
-      text: clean(ctaAction?.description ?? '') || ctaAction?.title || '联系 Adelie',
-      href: '/contact',
-    },
-  ]}
-/>}
+{
+  !isCaseDetail && !isResourceDetail && (
+    <CallToAction
+      title={
+        clean(ctaSection?.items.find((item) => /标题/.test(item.title))?.description ?? '') || '先从一次增长诊断开始'
+      }
+      subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
+      actions={[
+        {
+          variant: 'primary',
+          text: clean(ctaAction?.description ?? '') || ctaAction?.title || '联系 Adelie',
+          href: '/contact',
+        },
+      ]}
+    />
+  )
+}
