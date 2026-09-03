@@ -292,8 +292,8 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       ) : isProcess(section) ? (
         <Steps
           title={section.title}
-          subtitle={isSolutionPage ? section.subtitle : flowSubtitle(section)}
-          items={flowItems(isSolutionPage ? section.items : section.items.filter((item) => !isFlowNote(item))).map((item) => ({
+          subtitle={flowSubtitle(section)}
+          items={flowItems(section.items.filter((item) => !isFlowNote(item))).map((item) => ({
             ...item,
             icon: isSolutionPage ? solutionFlowIcon(item.title) : undefined,
           }))}
