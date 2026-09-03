@@ -87,8 +87,15 @@ const isCaseArchive = /^cases\/[^/]+$/.test(path);
 const isCaseDetail = /^cases\/[^/]+\/[^/]+$/.test(path);
 const isResourceArchive = /^resources\/[^/]+$/.test(path);
 const isResourceDetail = /^resources\/[^/]+\/[^/]+$/.test(path);
-const resourceGridTitle = path.endsWith('/tools') ? '工具与下载资料' : '最新文章';
+const resourceListSection = sections.find(
+  (section) => isResourceArchive && /分类与文章列表|工具列表/.test(section.title)
+);
+const resourceGridTitle = path.endsWith('/tools') ? '全部工具与资料' : '全部文章';
 const resourceActionText = path.endsWith('/tools') ? '查看清单' : '阅读文章';
+const resourceCategories = (resourceListSection?.items.find((item) => /分类/.test(item.title))?.description ?? '')
+  .split('、')
+  .map(clean)
+  .filter(Boolean);
 const caseMetrics = (heroValue(/成果/)?.description ?? '')
   .split(/[、，,]/)
   .map(clean)
@@ -120,6 +127,7 @@ const resourceCards = children.map((child) => {
     title: clean(value(/标题/) || child.title.replace(/^(文章详情|下载页)：/, '')),
     path: child.path,
     tagline: value(/分类/) || '实用资源',
+    category: (value(/分类/) || '实用资源').split('；')[0],
     description: value(/摘要|正文/) || undefined,
     image: value(/^(图片|配图|主图)/),
     metrics: [],
@@ -133,7 +141,8 @@ const visibleSections = sections.filter(
     !section.title.includes('Hero') &&
     !section.title.includes('Article Header') &&
     !/Header|Footer|CTA/.test(section.title) &&
-    !(isCaseArchive && /代表案例/.test(section.title))
+    !(isCaseArchive && /代表案例/.test(section.title)) &&
+    !(isResourceArchive && /分类与文章列表|工具列表/.test(section.title))
 );
 const isProcess = (section: Section) => /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title);
 const isFaq = (section: Section) => /FAQ/.test(section.title);
@@ -268,7 +277,13 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
   isCaseArchive && caseCards.length > 0 ? (
     <CaseStudyGrid items={caseCards} actionText="查看案例" />
   ) : isResourceArchive && resourceCards.length > 0 ? (
-    <CaseStudyGrid title={resourceGridTitle} actionText={resourceActionText} items={resourceCards} />
+    <CaseStudyGrid
+      title={resourceGridTitle}
+      actionText={resourceActionText}
+      categories={resourceCategories}
+      filterable={resourceCategories.length > 0}
+      items={resourceCards}
+    />
   ) : (
     !isCaseDetail &&
     !isResourceDetail &&
@@ -284,6 +299,14 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       />
     )
   )
+}
+
+{
+  isResourceArchive &&
+    resourceListSection?.items.some((item) => /精选文章/.test(item.title)) &&
+    resourceCards.length > 0 && (
+      <CaseStudyGrid title="精选文章" actionText="阅读文章" items={resourceCards.slice(0, 1)} />
+    )
 }
 
 {

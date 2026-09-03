@@ -5,6 +5,7 @@ interface CaseStudy {
   title: string;
   path: string;
   tagline?: string;
+  category?: string;
   description?: string;
   image?: string;
   metrics: string[];
@@ -13,21 +14,59 @@ interface CaseStudy {
 interface Props {
   title?: string;
   actionText?: string;
+  categories?: string[];
+  filterable?: boolean;
   items: CaseStudy[];
 }
 
-const { title = '代表案例', actionText = '查看详情', items } = Astro.props;
+const { title = '代表案例', actionText = '查看详情', categories = [], filterable = false, items } = Astro.props;
 ---
 
 <section class="relative not-prose scroll-mt-[72px]">
   <div class="absolute inset-0 -z-[1] bg-secondary/5 dark:bg-white/5"></div>
   <div class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16 lg:py-20">
     <h2 class="mb-8 text-center text-3xl font-bold tracking-tighter md:mb-12 md:text-4xl">{title}</h2>
-    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+    {
+      categories.length > 0 && (
+        <ul class="mb-8 flex flex-wrap justify-center gap-2 md:mb-12" aria-label="内容分类">
+          {filterable && (
+            <li>
+              <button
+                type="button"
+                class="border border-black bg-accent px-3 py-1 text-sm font-semibold text-black"
+                data-resource-filter="全部"
+                aria-pressed="true"
+              >
+                全部
+              </button>
+            </li>
+          )}
+          {categories.map((category) =>
+            filterable ? (
+              <li>
+                <button
+                  type="button"
+                  class="border border-black bg-page px-3 py-1 text-sm font-semibold dark:border-white"
+                  data-resource-filter={category}
+                  aria-pressed="false"
+                >
+                  {category}
+                </button>
+              </li>
+            ) : (
+              <li class="border border-black bg-page px-3 py-1 text-sm font-semibold dark:border-white">{category}</li>
+            )
+          )}
+        </ul>
+      )
+    }
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3" data-resource-grid={filterable ? '' : undefined}>
       {
         items.map((item) => (
           <a
             href={item.path}
+            data-resource-card={filterable ? '' : undefined}
+            data-category={item.category}
             class="group block overflow-hidden border-2 border-black bg-page shadow-[6px_6px_0_#18181b] transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] dark:hover:shadow-[10px_10px_0_#fff]"
           >
             {item.image && (
@@ -62,3 +101,33 @@ const { title = '代表案例', actionText = '查看详情', items } = Astro.pro
     </div>
   </div>
 </section>
+
+<script>
+  const bindResourceFilters = () => {
+    document.querySelectorAll('[data-resource-grid]').forEach((grid) => {
+      if (grid.dataset.filtersBound) return;
+      grid.dataset.filtersBound = 'true';
+      const section = grid.closest('section');
+      const buttons = section?.querySelectorAll('[data-resource-filter]') ?? [];
+      const cards = grid.querySelectorAll('[data-resource-card]');
+      buttons.forEach((button) =>
+        button.addEventListener('click', () => {
+          const filter = button.dataset.resourceFilter;
+          buttons.forEach((item) => {
+            const selected = item === button;
+            item.setAttribute('aria-pressed', String(selected));
+            item.classList.toggle('bg-accent', selected);
+            item.classList.toggle('bg-page', !selected);
+            item.classList.toggle('text-black', selected);
+          });
+          cards.forEach((card) =>
+            card.classList.toggle('hidden', filter !== '全部' && card.dataset.category !== filter)
+          );
+        })
+      );
+    });
+  };
+
+  bindResourceFilters();
+  document.addEventListener('astro:page-load', bindResourceFilters);
+</script>
