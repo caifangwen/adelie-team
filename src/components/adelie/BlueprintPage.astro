@@ -9,6 +9,7 @@ import Button from '~/components/ui/Button.astro';
 import CaseStudyGrid from '~/components/adelie/CaseStudyGrid.astro';
 import CaseDetail from '~/components/adelie/CaseDetail.astro';
 import TeamGrid from '~/components/adelie/TeamGrid.astro';
+import PartnerGrid from '~/components/adelie/PartnerGrid.astro';
 
 interface Props {
   body: string;
@@ -89,6 +90,7 @@ const isCaseDetail = /^cases\/[^/]+\/[^/]+$/.test(path);
 const isResourceArchive = /^resources\/[^/]+$/.test(path);
 const isResourceDetail = /^resources\/[^/]+\/[^/]+$/.test(path);
 const isTeamPage = path === 'about/team';
+const isPartnersPage = path === 'about/partners';
 const isAboutPage = /^about\//.test(path);
 const resourceListSection = sections.find(
   (section) => isResourceArchive && /分类与文章列表|工具列表/.test(section.title)
@@ -99,6 +101,11 @@ const resourceCategories = (resourceListSection?.items.find((item) => /分类/.t
   .split('、')
   .map(clean)
   .filter(Boolean);
+const caseListSection = sections.find((section) => isCaseArchive && /筛选与列表/.test(section.title));
+const caseCategories = (caseListSection?.items.find((item) => /筛选/.test(item.title))?.description ?? '')
+  .split('、')
+  .map(clean)
+  .filter((category) => category && category !== '全部');
 const caseMetrics = (heroValue(/成果/)?.description ?? '')
   .split(/[、，,]/)
   .map(clean)
@@ -109,10 +116,12 @@ const caseCards = children.map((child) => {
     const line = child.body.split('\n').find((line) => /^-\s+/.test(line) && label.test(line));
     return line ? itemFrom(line.replace(/^-\s+/, '')).description : undefined;
   };
+  const tags = (value(/标签/) ?? '').split('｜').map(clean).filter(Boolean);
   return {
     title: clean(child.title.replace(/^案例详情：/, '')),
     path: child.path,
-    tagline: value(/标签/),
+    tagline: tags.join('｜'),
+    categories: caseCategories.filter((category) => tags.includes(category)),
     description: value(/标题/),
     image: value(/^(图片|配图|主图)/),
     metrics: (value(/成果/) ?? '')
@@ -130,7 +139,7 @@ const resourceCards = children.map((child) => {
     title: clean(value(/标题/) || child.title.replace(/^(文章详情|下载页)：/, '')),
     path: child.path,
     tagline: value(/分类/) || '实用资源',
-    category: (value(/分类/) || '实用资源').split('；')[0],
+    categories: [(value(/分类/) || '实用资源').split('；')[0]],
     description: value(/摘要|正文/) || undefined,
     image: value(/^(图片|配图|主图)/),
     metrics: [],
@@ -144,8 +153,9 @@ const visibleSections = sections.filter(
     !section.title.includes('Hero') &&
     !section.title.includes('Article Header') &&
     !/Header|Footer|CTA/.test(section.title) &&
-    !(isCaseArchive && /代表案例/.test(section.title)) &&
-    !(isResourceArchive && /分类与文章列表|工具列表/.test(section.title))
+    !(isCaseArchive && /筛选与列表|代表案例/.test(section.title)) &&
+    !(isResourceArchive && /分类与文章列表|工具列表/.test(section.title)) &&
+    !(isPartnersPage && /认证与合作伙伴/.test(section.title))
 );
 const isProcess = (section: Section) =>
   /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title) ||
@@ -288,9 +298,17 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
     })
 }
 
+{isPartnersPage && <PartnerGrid />}
+
 {
   isCaseArchive && caseCards.length > 0 ? (
-    <CaseStudyGrid items={caseCards} actionText="查看案例" />
+    <CaseStudyGrid
+      title="全部案例"
+      actionText="查看案例"
+      categories={caseCategories}
+      filterable={caseCategories.length > 0}
+      items={caseCards}
+    />
   ) : isResourceArchive && resourceCards.length > 0 ? (
     <CaseStudyGrid
       title={resourceGridTitle}
@@ -313,6 +331,12 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
         columns={children.length > 3 ? 3 : 2}
       />
     )
+  )
+}
+
+{
+  isCaseArchive && caseCards.length > 0 && (
+    <CaseStudyGrid title="精选案例" actionText="查看案例" items={caseCards.slice(0, 1)} />
   )
 }
 

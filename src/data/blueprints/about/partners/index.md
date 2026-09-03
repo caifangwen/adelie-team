@@ -14,9 +14,11 @@
 - 组件：`CapabilityGrid`、`CapabilityCard`。
 
 ## 03. 认证与合作伙伴
-- 每项信息固定展示：`认证或伙伴 Logo｜名称｜有效状态/年份｜验证链接（如可公开）`。
-- 发布规则：`未取得或已失效的认证不展示；不使用“合作伙伴”泛称替代真实资质。`
-- 组件：`CertificationList`、`LogoWall`、`ExternalLink`。
+- `WordPress｜服务覆盖中`：`企业官网、内容架构、可编辑模块与基础 SEO 配置｜https://wordpress.org`。
+- `Shopify｜服务覆盖中`：`商店搭建、主题定制、市场配置与商品购买体验｜https://www.shopify.com`。
+- `Google Ads｜服务覆盖中`：`Search、Shopping、PMax 策略、转化追踪与账户优化｜https://ads.google.com`。
+- `Google Analytics & Tag Manager｜服务覆盖中`：`GA4、GTM、事件设计、数据口径与报告基础｜https://marketingplatform.google.com/about/analytics/`。
+- 组件：`PlatformCard`、`ExternalLink`。
 
 ## 04. CTA
 - 文案：`需要 WordPress、Shopify 与增长服务协同？告诉我们你的项目目标。`
