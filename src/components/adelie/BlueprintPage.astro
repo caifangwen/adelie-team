@@ -10,6 +10,7 @@ import CaseStudyGrid from '~/components/adelie/CaseStudyGrid.astro';
 import CaseDetail from '~/components/adelie/CaseDetail.astro';
 import TeamGrid from '~/components/adelie/TeamGrid.astro';
 import PartnerGrid from '~/components/adelie/PartnerGrid.astro';
+import SolutionCards from '~/components/adelie/SolutionCards.astro';
 
 interface Props {
   body: string;
@@ -92,6 +93,7 @@ const isResourceDetail = /^resources\/[^/]+\/[^/]+$/.test(path);
 const isTeamPage = path === 'about/team';
 const isPartnersPage = path === 'about/partners';
 const isAboutPage = /^about\//.test(path);
+const isSolutionPage = /^solutions\//.test(path);
 const resourceListSection = sections.find(
   (section) => isResourceArchive && /分类与文章列表|工具列表/.test(section.title)
 );
@@ -170,6 +172,16 @@ const flowItems = (items: Item[]): Item[] =>
   items.flatMap((item) =>
     item.title.includes('→') ? item.title.split('→').map((stage) => ({ title: clean(stage) })) : [item]
   );
+
+const solutionFlowIcon = (title: string) => {
+  if (/搜索|广告|社媒|流量/.test(title)) return 'tabler:search';
+  if (/产品|页面|商店|市场配置|落地页/.test(title)) return 'tabler:layout-dashboard';
+  if (/案例|规格|FAQ|能力证明/.test(title)) return 'tabler:shield-check';
+  if (/加购|结账|订单/.test(title)) return 'tabler:shopping-cart';
+  if (/报价|样品|咨询|表单/.test(title)) return 'tabler:file-text';
+  if (/CRM|邮件|短信|销售跟进|归因|优化/.test(title)) return 'tabler:chart-line';
+  return 'tabler:arrow-right';
+};
 
 const flowSubtitle = (section: Section): string | undefined => {
   const note = section.items
@@ -280,11 +292,16 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       ) : isProcess(section) ? (
         <Steps
           title={section.title}
-          subtitle={flowSubtitle(section)}
-          items={flowItems(section.items.filter((item) => !isFlowNote(item)))}
+          subtitle={isSolutionPage ? section.subtitle : flowSubtitle(section)}
+          items={flowItems(isSolutionPage ? section.items : section.items.filter((item) => !isFlowNote(item))).map((item) => ({
+            ...item,
+            icon: isSolutionPage ? solutionFlowIcon(item.title) : undefined,
+          }))}
           image={section.image}
           bg={bg}
         />
+      ) : isSolutionPage ? (
+        <SolutionCards title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
       ) : (
         <Features
           title={section.title}

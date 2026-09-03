@@ -4,11 +4,45 @@ import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 
 const metadata = {
   title: 'Adelie｜为增长而建的网站、SEO 与 Google Ads',
   ignoreTitleTemplate: true,
 };
+
+const industrySolutions = [
+  {
+    number: '01',
+    title: 'B2B 外贸',
+    description: '用产品页、行业页和信任内容，把海外搜索变成有效询盘。',
+    icon: 'tabler:briefcase',
+    href: '/solutions/b2b-export',
+  },
+  {
+    number: '02',
+    title: 'DTC 品牌',
+    description: '用品牌型 Shopify 商店和落地页，让投放流量更容易成交。',
+    icon: 'tabler:brand-shopee',
+    href: '/solutions/dtc-brand',
+  },
+  {
+    number: '03',
+    title: '跨境电商',
+    description: '从多市场商店到广告归因，搭建可以规模化运营的销售链路。',
+    icon: 'tabler:world',
+    href: '/solutions/cross-border-ecommerce',
+  },
+  {
+    number: '04',
+    title: '企业官网获客',
+    description: '把公司介绍升级为可被搜索、可被衡量的获客资产。',
+    icon: 'tabler:layout-dashboard',
+    href: '/solutions/corporate-lead-gen',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -54,36 +88,31 @@ const metadata = {
     ]}
   />
 
-  <Features
-    title="不同的生意，需要不同的增长路径。"
-    columns={2}
-    items={[
+  <WidgetWrapper
+    id="industry-solutions"
+    containerClass="max-w-6xl"
+    bg={'<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></div>'}
+  >
+    <Headline title="不同的生意，需要不同的增长路径。" />
+    <div class="grid gap-5 sm:grid-cols-2">
       {
-        title: 'B2B 外贸',
-        description: '用产品页、行业页和信任内容，把海外搜索变成有效询盘。',
-        icon: 'tabler:briefcase',
-        callToAction: { text: '查看方案', href: '/solutions/b2b-export' },
-      },
-      {
-        title: 'DTC 品牌',
-        description: '用品牌型 Shopify 商店和落地页，让投放流量更容易成交。',
-        icon: 'tabler:brand-shopee',
-        callToAction: { text: '查看方案', href: '/solutions/dtc-brand' },
-      },
-      {
-        title: '跨境电商',
-        description: '从多市场商店到广告归因，搭建可以规模化运营的销售链路。',
-        icon: 'tabler:world',
-        callToAction: { text: '查看方案', href: '/solutions/cross-border-ecommerce' },
-      },
-      {
-        title: '企业官网获客',
-        description: '把公司介绍升级为可被搜索、可被衡量的获客资产。',
-        icon: 'tabler:layout-dashboard',
-        callToAction: { text: '查看方案', href: '/solutions/corporate-lead-gen' },
-      },
-    ]}
-  />
+        industrySolutions.map((solution) => (
+          <a
+            href={solution.href}
+            class="group relative flex min-h-56 flex-col overflow-hidden border-2 border-black bg-page p-6 shadow-[6px_6px_0_#18181b] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:bg-accent hover:shadow-[10px_10px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] dark:hover:shadow-[10px_10px_0_#fff]"
+          >
+            <span class="absolute right-5 top-4 text-sm font-bold text-muted">{solution.number}</span>
+            <div class="mb-8 flex h-12 w-12 items-center justify-center border-2 border-black bg-accent text-black group-hover:bg-page dark:border-white dark:group-hover:bg-page">
+              <Icon name={solution.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="text-2xl font-bold group-hover:text-black">{solution.title}</h3>
+            <p class="mt-3 max-w-md text-muted group-hover:text-black">{solution.description}</p>
+            <span class="mt-auto pt-8 font-semibold underline underline-offset-4">查看方案 →</span>
+          </a>
+        ))
+      }
+    </div>
+  </WidgetWrapper>
 
   <Features
     title="结果应该看得见。"
