@@ -19,22 +19,30 @@
 - `风险降低`：`提供评价、FAQ、配送、退换与客服入口。`
 
 ## 04. 推荐方案
+- 图片：`https://images.unsplash.com/photo-1556228720-195a672e8a03`
+- 配图：`https://images.unsplash.com/photo-1596462502278-27bfdc403348`
+- 配图：`https://images.unsplash.com/photo-1586880244406-556ebe35f282`
 - `品牌型 Shopify 商店`：`统一品牌、产品教育、系列与购买体验。`
 - `高转化商品页`：`按用户疑虑顺序组织功效、证据、用法和评价。`
 - `Campaign 落地页`：`承接单一人群、问题或套装，保持广告信息一致。`
 - `复购内容与自动化`：`围绕使用节点、补货周期和关联商品沟通。`
 
 ## 05. 首购与复购路径
+- 图片：`https://images.unsplash.com/photo-1586880244406-556ebe35f282`
 - `搜索 / 社媒 / 达人内容` → `Campaign / 商品页` → `选择与加购` → `结账` → `使用教育` → `补货与复购`
 - 指标：`商品页转化率、加购率、结账完成率、退款率、订阅率和复购周期。`
 
 ## 06. 相关案例与指南
+- 图片：`https://images.unsplash.com/photo-1556228720-195a672e8a03`
+- 配图：`https://images.unsplash.com/photo-1596462502278-27bfdc403348`
+- 配图：`https://images.unsplash.com/photo-1556742111-a301076d9d18`
 - `Mira Skin 北美站`：`<a href="/cases/shopify/mira-skin">查看美妆品牌首发案例 →</a>`
 - `商品页转化清单`：`<a href="/resources/wordpress-shopify/shopify-product-page-conversion-checklist">检查功效、证明与购买信息 →</a>`
 - `Shopify 退换体验`：`<a href="/resources/wordpress-shopify/shopify-returns-experience">降低售前疑虑并明确售后边界 →</a>`
 
 ## 07. CTA
 - 标题：`先选一个主推商品，把用户最关心的问题回答完整。`
+- 正文：`提供商品页、目标市场和用户常见问题，我们会先检查产品教育、证据与购买路径。`
 - 按钮：`申请商品页诊断`
 
 ## 08. 常见问题 FAQ

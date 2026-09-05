@@ -31,11 +31,13 @@ export async function getStaticPaths() {
 const { page, children } = Astro.props;
 const body = page.body ?? '';
 const title = page.data.title ?? body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie';
+const description =
+  page.data.excerpt ?? body.match(/^-\s+正文：`?([^`\n]+)`?[。.]?$/m)?.[1];
 const isArticle = page.data.kind === 'article';
 const { Content } = isArticle ? await render(page) : { Content: null };
 ---
 
-<Layout metadata={{ title }}>
+<Layout metadata={{ title, description }}>
   {
     isArticle && Content ? (
       <ResourceArticle {...page.data}>

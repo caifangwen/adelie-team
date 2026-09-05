@@ -19,22 +19,30 @@
 - `采购支持`：`提供资格材料、技术文档、初步评估和联系路径。`
 
 ## 04. 推荐方案
+- 图片：`https://images.unsplash.com/photo-1473341304170-971dccb5ac1e`
+- 配图：`https://images.unsplash.com/photo-1508514177221-188b1cf16e9d`
+- 配图：`https://images.unsplash.com/photo-1551836022-d5d88e9218df`
 - `企业官网重构`：`围绕解决方案、行业、项目案例和能力建立架构。`
 - `内容与 SEO`：`覆盖客户在调研、比较和供应商筛选阶段的问题。`
 - `项目型落地页`：`为重点地区、服务或活动建立明确的咨询路径。`
 - `线索归因`：`记录来源、需求类型、地区和项目阶段。`
 
 ## 05. 获客路径
+- 图片：`https://images.unsplash.com/photo-1551836022-d5d88e9218df`
 - `行业搜索 / 推荐 / 活动` → `解决方案或项目页` → `能力与案例` → `初步评估` → `商务跟进`
 - 指标：`核心方案访问、案例阅读、资料请求、合格线索和销售推进阶段。`
 
 ## 06. 相关案例与指南
+- 图片：`https://images.unsplash.com/photo-1473341304170-971dccb5ac1e`
+- 配图：`https://images.unsplash.com/photo-1436491865332-7a61a109cc05`
+- 配图：`https://images.unsplash.com/photo-1451187580459-43490279c0fa`
 - `GreenGrid 新能源官网`：`<a href="/cases/wordpress/greengrid">查看新能源业务架构案例 →</a>`
 - `AeroTech 内容中心`：`<a href="/cases/seo/aerotech">查看专业内容如何承接搜索 →</a>`
 - `B2B 案例写作指南`：`<a href="/resources/seo/b2b-seo-case-study-guide">整理可信的项目证据 →</a>`
 
 ## 07. CTA
 - 标题：`先把一个重点方案和一个代表项目讲清楚。`
+- 正文：`提供服务范围、项目资料和目标客户，我们会先梳理最需要公开的能力与证据。`
 - 按钮：`申请官网内容诊断`
 
 ## 08. 常见问题 FAQ

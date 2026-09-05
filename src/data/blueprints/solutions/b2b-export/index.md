@@ -31,6 +31,9 @@
 
 ## 05. 页面与功能清单
 > 首期只建设影响理解、验证和询盘的页面，不复制整套纸质目录。
+- 图片：`https://images.unsplash.com/photo-1581092160607-ee22621dd758`
+- 配图：`https://images.unsplash.com/photo-1498050108023-c5249f4df085`
+- 配图：`https://images.unsplash.com/photo-1521737711867-e3b97375f902`
 - `核心页面`：`首页、能力页、重点产品页、行业或应用页、案例页、关于页与联系页。`
 - `证明材料`：`认证、测试能力、质量流程、交付市场、客户类型和可公开案例。`
 - `询盘功能`：`按报价、样品和技术咨询设置入口，并记录产品、地区与来源。`
@@ -50,17 +53,23 @@
 - `持续优化`：`按有效询盘率、重点页面进入率、表单完成率和销售反馈调整内容。`
 
 ## 08. 相关案例
+- 图片：`https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122`
+- 配图：`https://images.unsplash.com/photo-1519389950473-47ba0277781c`
+- 配图：`https://images.unsplash.com/photo-1551288049-bebda4e38f71`
 - `NovaTech 工业官网重构`：`<a href="/cases/wordpress/novatech">查看如何把分散技术资料整理成海外获客路径 →</a>`
 - `Atlas Parts SEO 增长`：`<a href="/cases/seo/atlas-parts">查看产品与搜索需求如何建立对应关系 →</a>`
 - `Boreal B2B 询盘投放`：`<a href="/cases/sem/boreal">查看搜索广告如何筛选更合适的询盘 →</a>`
 
 ## 09. 相关指南与工具
+- 图片：`https://images.unsplash.com/photo-1455390582262-044cdead277a`
+- 配图：`https://images.unsplash.com/photo-1456324504439-367cee3b3c32`
 - `B2B 网站页面结构`：`<a href="/resources/wordpress-shopify/b2b-website-page-structure">规划产品、行业、案例与询盘页面 →</a>`
 - `B2B 关键词地图`：`<a href="/resources/seo/b2b-keyword-map">把产品、应用和采购问题分配到正确页面 →</a>`
 - `建站需求书`：`<a href="/resources/tools/website-brief">整理可直接用于询价和启动的需求 →</a>`
 
 ## 10. CTA
 - 标题：`让网站先帮销售团队完成第一轮沟通。`
+- 正文：`提供重点产品、目标市场和现有网站，我们会先检查买家理解、证明与询盘路径。`
 - 按钮：`申请 B2B 网站诊断`。
 - 组件：`CaseStudyCard`、`LeadForm`、`SiteFooter`。
 

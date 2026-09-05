@@ -30,6 +30,9 @@
 - 组件：`SolutionStack`、`ServiceCard`。
 
 ## 05. 页面与功能清单
+- 图片：`https://images.unsplash.com/photo-1556742044-3c52d6e88c62`
+- 配图：`https://images.unsplash.com/photo-1441986300917-64674bd600d8`
+- 配图：`https://images.unsplash.com/photo-1523275335684-37898b6baf30`
 - `核心商店页面`：`首页、系列页、商品页、品牌页、FAQ、配送退换与联系页。`
 - `商品决策内容`：`利益点、成分或材质、使用场景、评价、对比、配送和风险说明。`
 - `成交功能`：`搜索筛选、加购、结账、本地支付、订阅或补充购买入口。`
@@ -48,17 +51,23 @@
 - `持续优化`：`观察商品页转化率、加购率、结账完成率、首购 CPA 与复购率。`
 
 ## 08. 相关案例
+- 图片：`https://images.unsplash.com/photo-1556228720-195a672e8a03`
+- 配图：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
+- 配图：`https://images.unsplash.com/photo-1556742049-0cfed4f6a45d`
 - `Mira Skin 北美站上线`：`<a href="/cases/shopify/mira-skin">查看品牌、成分证明与首购路径如何协同 →</a>`
 - `Luma Home 转化优化`：`<a href="/cases/shopify/luma-home">查看商品页与购买路径的优化方式 →</a>`
 - `Vela Home Shopping 增长`：`<a href="/cases/sem/vela-home">查看商品投放与订单数据如何对齐 →</a>`
 
 ## 09. 相关指南与工具
+- 图片：`https://images.unsplash.com/photo-1586880244406-556ebe35f282`
+- 配图：`https://images.unsplash.com/photo-1556742111-a301076d9d18`
 - `商品页转化检查清单`：`<a href="/resources/wordpress-shopify/shopify-product-page-conversion-checklist">检查说服、信任与购买阻力 →</a>`
 - `弃购优化指南`：`<a href="/resources/wordpress-shopify/shopify-checkout-abandonment">定位结账流失环节 →</a>`
 - `落地页评分表`：`<a href="/resources/tools/landing-page-scorecard">快速审查广告落地页 →</a>`
 
 ## 10. CTA
 - 标题：`先找出用户在哪一步放弃购买。`
+- 正文：`提供商店、主推商品和现有流量数据，我们会先定位最明显的购买阻力。`
 - 按钮：`申请商店转化诊断`。
 - 组件：`CaseStudyCard`、`LeadForm`、`SiteFooter`。
 

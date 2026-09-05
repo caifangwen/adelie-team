@@ -19,22 +19,30 @@
 - `下一步是否清楚`：`区分报价、样品、图纸评估与技术咨询。`
 
 ## 04. 推荐页面与增长组合
+- 图片：`https://images.unsplash.com/photo-1581092160607-ee22621dd758`
+- 配图：`https://images.unsplash.com/photo-1498050108023-c5249f4df085`
+- 配图：`https://images.unsplash.com/photo-1519389950473-47ba0277781c`
 - `产品与应用架构`：`产品页承接规格，应用页解释具体工况和选型。`
 - `能力与证据中心`：`集中呈现设备、质量、认证、交期和案例。`
 - `B2B SEO`：`覆盖产品、应用、材料、规格和采购问题。`
 - `搜索广告与询盘追踪`：`先测试高意向产品和市场，再按有效机会扩展。`
 
 ## 05. 询盘路径
+- 图片：`https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3`
 - `产品或应用搜索` → `产品 / 行业页` → `规格与证据` → `报价 / 样品 / 图纸表单` → `销售评估`
 - 指标：`重点页面进入率、资料查看、表单完成率、有效询盘率和销售响应时间。`
 
 ## 06. 相关案例与指南
+- 图片：`https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122`
+- 配图：`https://images.unsplash.com/photo-1551288049-bebda4e38f71`
+- 配图：`https://images.unsplash.com/photo-1454165804606-c3d57bc86b40`
 - `NovaTech 工业官网`：`<a href="/cases/wordpress/novatech">查看技术资料重组案例 →</a>`
 - `Atlas Parts SEO`：`<a href="/cases/seo/atlas-parts">查看工业产品搜索增长案例 →</a>`
 - `B2B 产品页指南`：`<a href="/resources/wordpress-shopify/b2b-product-page-guide">规划规格、应用和询盘信息 →</a>`
 
 ## 07. CTA
 - 标题：`先选一个重点产品线，跑通从搜索到销售评估的路径。`
+- 正文：`提供产品目录、目标市场和典型询盘，我们会先找出采购判断缺失的信息。`
 - 按钮：`申请工业网站诊断`
 
 ## 08. 常见问题 FAQ

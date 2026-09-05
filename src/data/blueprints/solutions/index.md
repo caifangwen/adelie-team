@@ -9,6 +9,9 @@
 
 ## 02. 按业务模式选择
 > 四类方案分别承接不同的客户路径，可以从最接近当前目标的一类开始。
+- 图片：`https://images.unsplash.com/photo-1521737711867-e3b97375f902`
+- 配图：`https://images.unsplash.com/photo-1556761175-b413da4baf72`
+- 配图：`https://images.unsplash.com/photo-1552664730-d307ca884978`
 - `B2B 外贸`：`<a href="/solutions/b2b-export">适合产品复杂、决策链长，以海外询盘和销售跟进为主的企业 →</a>`
 - `DTC 品牌出海`：`<a href="/solutions/dtc-brand">适合需要建立品牌偏好、提升首购与复购的消费品牌 →</a>`
 - `跨境电商`：`<a href="/solutions/cross-border-ecommerce">适合扩展多市场、管理商品和优化订单利润的商家 →</a>`
@@ -22,6 +25,9 @@
 
 ## 04. 按行业查看
 > 行业页补充采购习惯、决策证据和页面重点，底层仍复用对应的增长方案。
+- 图片：`https://images.unsplash.com/photo-1519389950473-47ba0277781c`
+- 配图：`https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122`
+- 配图：`https://images.unsplash.com/photo-1618221195710-dd6b41faaea6`
 - `工业制造与设备`：`<a href="/solutions/industrial-manufacturing">复杂产品、应用、认证与技术询盘 →</a>`
 - `新能源与工程企业`：`<a href="/solutions/renewable-energy-engineering">项目能力、工程经验与长周期线索 →</a>`
 - `家居与生活方式品牌`：`<a href="/solutions/home-lifestyle">视觉内容、商品发现与多市场成交 →</a>`
@@ -32,6 +38,9 @@
 - 说明：`首期只覆盖一个主要目标、一个重点市场和必要页面，验证后再扩展。`
 
 ## 06. 交付能力
+- 图片：`https://images.unsplash.com/photo-1553877522-43269d4ea984`
+- 配图：`https://images.unsplash.com/photo-1498050108023-c5249f4df085`
+- 配图：`https://images.unsplash.com/photo-1551288049-bebda4e38f71`
 - `网站建设`：`WordPress 企业官网、Shopify 商店、落地页与内容模板。`
 - `搜索增长`：`关键词与页面规划、技术 SEO、内容和内部链接。`
 - `广告获客`：`搜索、Shopping、落地页和转化追踪。`
@@ -39,6 +48,7 @@
 
 ## 07. CTA
 - 标题：`不确定从哪一类开始？先把当前目标和数据说清楚。`
+- 正文：`告诉我们你的业务模式、重点市场与当前瓶颈，我们会先判断最值得处理的一段路径。`
 - 按钮：`获取初步建议`
 
 ## 08. 常见问题 FAQ

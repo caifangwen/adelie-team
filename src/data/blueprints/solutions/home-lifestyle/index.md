@@ -19,22 +19,30 @@
 - `跨市场差异`：`按地区处理价格、单位、库存、配送和内容表达。`
 
 ## 04. 推荐方案
+- 图片：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
+- 配图：`https://images.unsplash.com/photo-1618221195710-dd6b41faaea6`
+- 配图：`https://images.unsplash.com/photo-1441986300917-64674bd600d8`
 - `Shopify 商店架构`：`建立系列、筛选、商品模板和内容发布规则。`
 - `场景化落地页`：`让广告主张、空间灵感和商品集合保持一致。`
 - `Shopping 与搜索广告`：`结合商品利润、库存和市场控制投放。`
 - `SEO 内容`：`覆盖风格、空间、材质、尺寸和搭配需求。`
 
 ## 05. 成交路径
+- 图片：`https://images.unsplash.com/photo-1556742111-a301076d9d18`
 - `搜索 / 社媒 / Shopping` → `场景或集合页` → `商品详情` → `配送确认` → `结账` → `售后与复购`
 - 指标：`集合到商品点击率、加购率、配送信息查看、结账完成率和退款率。`
 
 ## 06. 相关案例与指南
+- 图片：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
+- 配图：`https://images.unsplash.com/photo-1556742049-0cfed4f6a45d`
+- 配图：`https://images.unsplash.com/photo-1556742044-3c52d6e88c62`
 - `Luma Home 转化优化`：`<a href="/cases/shopify/luma-home">查看家居商店购买路径案例 →</a>`
 - `Vela Home Shopping`：`<a href="/cases/sem/vela-home">查看家居商品投放案例 →</a>`
 - `Shopify 信任元素`：`<a href="/resources/wordpress-shopify/shopify-trust-elements">检查配送、退换和商品证明 →</a>`
 
 ## 07. CTA
 - 标题：`先从一个高流量系列，找出商品发现与购买阻力。`
+- 正文：`提供商店、重点系列和市场数据，我们会先检查发现、商品信息与配送环节。`
 - 按钮：`申请商店转化诊断`
 
 ## 08. 常见问题 FAQ

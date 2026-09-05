@@ -1,6 +1,7 @@
 ---
 import HeroText from '~/components/widgets/HeroText.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -11,6 +12,7 @@ import CaseDetail from '~/components/adelie/CaseDetail.astro';
 import TeamGrid from '~/components/adelie/TeamGrid.astro';
 import PartnerGrid from '~/components/adelie/PartnerGrid.astro';
 import SolutionCards from '~/components/adelie/SolutionCards.astro';
+import SolutionGallery from '~/components/adelie/SolutionGallery.astro';
 
 interface Props {
   body: string;
@@ -25,7 +27,7 @@ interface Props {
 
 type Item = { title: string; description?: string };
 type SectionImage = { src: string; alt: string };
-type Section = { title: string; subtitle?: string; image?: SectionImage; items: Item[] };
+type Section = { title: string; subtitle?: string; image?: SectionImage; images?: SectionImage[]; items: Item[] };
 
 const { body, path, children = [] } = Astro.props;
 
@@ -45,15 +47,18 @@ const itemFrom = (line: string): Item => {
 };
 
 /** 抽取“图片”行并移除出条目列表，返回图片地址（description 为空时从 title 里剥离前缀） */
-const takeImage = (items: Item[], alt: string): { rest: Item[]; image?: SectionImage } => {
-  const index = items.findIndex((item) => /^(图片|配图|主图)/.test(item.title));
-  if (index < 0) return { rest: items };
-
-  const item = items[index];
-  const src = item.description || item.title.replace(/^(图片|配图|主图)[:：]?/, '').trim();
+const takeImage = (items: Item[], alt: string): { rest: Item[]; image?: SectionImage; images: SectionImage[] } => {
+  const media = items.filter((item) => /^(图片|配图|主图)/.test(item.title));
+  const images = media
+    .map((item, index) => {
+      const src = item.description || item.title.replace(/^(图片|配图|主图)[:：]?/, '').trim();
+      return src ? { src, alt: `${alt} ${index + 1}` } : undefined;
+    })
+    .filter((item): item is SectionImage => !!item);
   return {
-    rest: items.filter((_, i) => i !== index),
-    image: src ? { src, alt } : undefined,
+    rest: items.filter((item) => !media.includes(item)),
+    image: images[0],
+    images,
   };
 };
 
@@ -74,11 +79,12 @@ const sections: Section[] = body
       .map((line) => itemFrom(line.replace(/^-\s+/, '')))
       .filter((item) => item.title && !/^(组件|Footer)/.test(item.title));
     const sectionTitle = clean(heading.replace(/^\d+\.\s*/, ''));
-    const { rest, image } = takeImage(rawItems, sectionTitle);
+    const { rest, image, images } = takeImage(rawItems, sectionTitle);
     return {
       title: sectionTitle,
       subtitle: subtitle || undefined,
       image,
+      images,
       items: rest,
     };
   })
@@ -155,6 +161,7 @@ const resourceCards = children.map((child) => {
 const action = heroValue(/按钮|下载|获取|申请/);
 const ctaSection = sections.find((section) => /CTA/.test(section.title));
 const ctaAction = ctaSection?.items.find((item) => /按钮/.test(item.title));
+const ctaSubtitle = ctaSection?.items.find((item) => /正文|说明/.test(item.title))?.description;
 const visibleSections = sections.filter(
   (section) =>
     !section.title.includes('Hero') &&
@@ -168,6 +175,7 @@ const isProcess = (section: Section) =>
   /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title) ||
   (path === 'about/process' && /启动|执行|持续/.test(section.title));
 const isFaq = (section: Section) => /FAQ/.test(section.title);
+const isAudienceSection = (section: Section) => /适用|业务场景|需要完成的判断|决策内容重点|购买决策重点/.test(section.title);
 
 /** 流程页里的“表单提示 / 关键指标”这类备注，提升为区块副标题 */
 const isFlowNote = (item: Item) => /提示|指标|备注|说明/.test(item.title) && !!item.description;
@@ -248,8 +256,16 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
                   />
                 </div>
               )}
+              {isSolutionPage && (
+                <ul class="mt-7 flex flex-wrap gap-2" aria-label="方案特点">
+                  {['策略先行', '分阶段上线', '数据可追踪'].map((label) => (
+                    <li class="border-2 border-black bg-page px-3 py-1 text-sm font-bold dark:border-white">{label}</li>
+                  ))}
+                </ul>
+              )}
             </div>
-            <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+            <div class="relative intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              {isSolutionPage && <div class="absolute -right-3 -top-3 h-20 w-20 border-2 border-black bg-accent dark:border-white" aria-hidden="true" />}
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
@@ -261,6 +277,11 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
                 loading="eager"
                 fetchpriority="high"
               />
+              {isSolutionPage && (
+                <div class="absolute -bottom-5 -left-3 border-2 border-black bg-primary px-5 py-3 font-bold text-white shadow-[4px_4px_0_#18181b] dark:border-white dark:shadow-[4px_4px_0_#fff]">
+                  WEBSITE × SEO × ADS
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -277,6 +298,8 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
     />
   )
 }
+
+{path === 'solutions' && <SolutionGallery />}
 
 {isTeamPage && <TeamGrid />}
 
@@ -305,8 +328,19 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
           image={section.image}
           bg={bg}
         />
+      ) : isSolutionPage && isAudienceSection(section) ? (
+        <Features2
+          title={section.title}
+          subtitle={section.subtitle}
+          items={section.items.map((item) => ({
+            ...item,
+            icon: 'tabler:target-arrow',
+          }))}
+          columns={section.items.length > 3 ? 4 : 3}
+          bg={bg}
+        />
       ) : isSolutionPage ? (
-        <SolutionCards title={section.title} subtitle={section.subtitle} items={section.items} bg={bg} />
+        <SolutionCards title={section.title} subtitle={section.subtitle} items={section.items} images={section.images} bg={bg} />
       ) : (
         <Features
           title={section.title}
@@ -342,7 +376,7 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
   ) : (
     !isCaseDetail &&
     !isResourceDetail &&
-    children.length > 0 && (
+    children.length > 0 && path !== 'solutions' && (
       <Features
         title="相关内容"
         items={children.map((child) => ({
@@ -376,7 +410,7 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
       title={
         clean(ctaSection?.items.find((item) => /标题/.test(item.title))?.description ?? '') || '先从一次增长诊断开始'
       }
-      subtitle="告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。"
+      subtitle={ctaSubtitle || '告诉我们你的业务目标、现有网站或广告账户，我们会先给出可执行的方向。'}
       actions={[
         {
           variant: 'primary',

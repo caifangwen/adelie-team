@@ -30,6 +30,9 @@
 - 组件：`SolutionStack`、`ServiceCard`。
 
 ## 05. 页面、数据与运营清单
+- 图片：`https://images.unsplash.com/photo-1521295121783-8a321d551ad2`
+- 配图：`https://images.unsplash.com/photo-1558494949-ef010cbdcc31`
+- 配图：`https://images.unsplash.com/photo-1556742049-0cfed4f6a45d`
 - `市场配置`：`域名或路径、语言、货币、定价、税费、支付与配送承诺。`
 - `商品体系`：`商品数据、变体、集合、筛选、库存与 Feed 的统一规则。`
 - `本地化页面`：`首页、集合页、商品页、活动页和政策页按市场调整。`
@@ -47,17 +50,23 @@
 - `复制与优化`：`按市场转化率、获客成本、退款率和贡献利润决定扩展。`
 
 ## 08. 相关案例
+- 图片：`https://images.unsplash.com/photo-1551698618-1dfe5d97d256`
+- 配图：`https://images.unsplash.com/photo-1556228720-195a672e8a03`
+- 配图：`https://images.unsplash.com/photo-1472851294608-062f824d29cc`
 - `Northline Outdoor 多市场商店`：`<a href="/cases/shopify/northline-outdoor">查看多市场结构与运营边界如何规划 →</a>`
 - `Vela Home Shopping 增长`：`<a href="/cases/sem/vela-home">查看商品投放与订单归因如何连接 →</a>`
 - `Mira Skin 北美站上线`：`<a href="/cases/shopify/mira-skin">查看单一市场首发如何控制复杂度 →</a>`
 
 ## 09. 相关指南与工具
+- 图片：`https://images.unsplash.com/photo-1521295121783-8a321d551ad2`
+- 配图：`https://images.unsplash.com/photo-1554224155-8d04cb21cd6c`
 - `Shopify 市场本地化`：`<a href="/resources/wordpress-shopify/shopify-market-localization">规划语言、价格与本地内容 →</a>`
 - `商品数据迁移`：`<a href="/resources/wordpress-shopify/shopify-product-data-migration">整理商品、变体与迁移验收 →</a>`
 - `Shopify 建站成本`：`<a href="/resources/wordpress-shopify/shopify-website-cost">理解平台、实施与运营成本 →</a>`
 
 ## 10. CTA
 - 标题：`先确定最值得进入的市场，再增加复杂度。`
+- 正文：`提供目标市场、商品范围和物流条件，我们会先梳理最小可行的上线范围。`
 - 按钮：`申请跨境增长诊断`。
 - 组件：`CaseStudyCard`、`LeadForm`、`SiteFooter`。
 

@@ -30,6 +30,9 @@
 - 组件：`SolutionStack`、`ServiceCard`。
 
 ## 05. 页面与功能清单
+- 图片：`https://images.unsplash.com/photo-1498050108023-c5249f4df085`
+- 配图：`https://images.unsplash.com/photo-1497366811353-6870744d04b2`
+- 配图：`https://images.unsplash.com/photo-1522071820081-009f0129c71c`
 - `核心页面`：`首页、服务页、行业或场景页、案例页、关于页、资源与联系页。`
 - `信任内容`：`方法、团队、资质、客户评价、项目过程和可验证结果。`
 - `线索入口`：`预约、需求表单、电话或邮件，并明确提交后的响应方式。`
@@ -47,17 +50,23 @@
 - `上线优化`：`观察重点服务页进入率、案例点击率、表单完成率和有效线索率。`
 
 ## 08. 相关案例
+- 图片：`https://images.unsplash.com/photo-1473341304170-971dccb5ac1e`
+- 配图：`https://images.unsplash.com/photo-1436491865332-7a61a109cc05`
+- 配图：`https://images.unsplash.com/photo-1460925895917-afdab827c52f`
 - `GreenGrid 新能源官网`：`<a href="/cases/wordpress/greengrid">查看复杂业务如何整理为清晰官网结构 →</a>`
 - `AeroTech 英文内容中心`：`<a href="/cases/seo/aerotech">查看官网如何持续承接非品牌搜索 →</a>`
 - `ClearForm 关键词重构`：`<a href="/cases/seo/clearform">查看服务、问题与搜索意图如何重新对应 →</a>`
 
 ## 09. 相关指南与工具
+- 图片：`https://images.unsplash.com/photo-1454165804606-c3d57bc86b40`
+- 配图：`https://images.unsplash.com/photo-1552664688-cf412ec27db2`
 - `B2B 首页信息结构`：`<a href="/resources/wordpress-shopify/b2b-homepage-messaging">让首页更快说明对象、价值与下一步 →</a>`
 - `网站改版需求书`：`<a href="/resources/wordpress-shopify/website-redesign-brief">整理改版目标、内容和验收边界 →</a>`
 - `建站需求书工具`：`<a href="/resources/tools/website-brief">形成可用于内部确认和询价的需求 →</a>`
 
 ## 10. CTA
 - 标题：`看一看你的网站，到底有没有在帮业务获客。`
+- 正文：`提供网站、重点服务和销售线索现状，我们会先判断内容、流量还是转化路径需要优先处理。`
 - 按钮：`申请免费诊断`。
 - 组件：`CaseStudyCard`、`LeadForm`、`SiteFooter`。
 
