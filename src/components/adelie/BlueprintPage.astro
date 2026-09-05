@@ -15,7 +15,12 @@ import SolutionCards from '~/components/adelie/SolutionCards.astro';
 interface Props {
   body: string;
   path: string;
-  children?: Array<{ title: string; path: string; body: string }>;
+  children?: Array<{
+    title: string;
+    path: string;
+    body: string;
+    data?: { excerpt?: string; image?: string; category?: string; readingTime?: string };
+  }>;
 }
 
 type Item = { title: string; description?: string };
@@ -138,12 +143,12 @@ const resourceCards = children.map((child) => {
     return line ? itemFrom(line.replace(/^-\s+/, '')).description : undefined;
   };
   return {
-    title: clean(value(/标题/) || child.title.replace(/^(文章详情|下载页)：/, '')),
+    title: clean(child.data?.title || value(/标题/) || child.title.replace(/^(文章详情|下载页)：/, '')),
     path: child.path,
-    tagline: value(/分类/) || '实用资源',
-    categories: [(value(/分类/) || '实用资源').split('；')[0]],
-    description: value(/摘要|正文/) || undefined,
-    image: value(/^(图片|配图|主图)/),
+    tagline: child.data?.category || value(/分类/) || '实用资源',
+    categories: [child.data?.category || (value(/分类/) || '实用资源').split('；')[0]],
+    description: child.data?.excerpt || value(/摘要|正文/) || undefined,
+    image: child.data?.image || value(/^(图片|配图|主图)/),
     metrics: [],
   };
 });

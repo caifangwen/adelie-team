@@ -1,7 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '~/layouts/PageLayout.astro';
 import BlueprintPage from '~/components/adelie/BlueprintPage.astro';
+import ResourceArticle from '~/components/adelie/ResourceArticle.astro';
 
 export const prerender = true;
 
@@ -19,8 +20,9 @@ export async function getStaticPaths() {
       })
       .map((child) => ({
         path: `/${pathFromId(child.id)}`,
-        title: child.body?.match(/^#\s+(.+)$/m)?.[1] ?? pathFromId(child.id),
+        title: child.data.title ?? child.body?.match(/^#\s+(.+)$/m)?.[1] ?? pathFromId(child.id),
         body: child.body ?? '',
+        data: child.data,
       }));
     return { params: { blueprint: pathname || undefined }, props: { page, children } };
   });
@@ -28,9 +30,19 @@ export async function getStaticPaths() {
 
 const { page, children } = Astro.props;
 const body = page.body ?? '';
-const title = body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie';
+const title = page.data.title ?? body.match(/^#\s+(.+)$/m)?.[1] ?? 'Adelie';
+const isArticle = page.data.kind === 'article';
+const { Content } = isArticle ? await render(page) : { Content: null };
 ---
 
 <Layout metadata={{ title }}>
-  <BlueprintPage body={body} path={pathFromId(page.id)} children={children} />
+  {
+    isArticle && Content ? (
+      <ResourceArticle {...page.data}>
+        <Content />
+      </ResourceArticle>
+    ) : (
+      <BlueprintPage body={body} path={pathFromId(page.id)} children={children} />
+    )
+  }
 </Layout>
