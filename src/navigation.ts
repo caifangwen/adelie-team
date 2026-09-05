@@ -15,6 +15,7 @@ export const headerData = {
     {
       text: '行业方案',
       links: [
+        { text: '方案总览', href: getPermalink('/solutions') },
         { text: 'B2B 外贸', href: getPermalink('/solutions/b2b-export') },
         { text: 'DTC 品牌出海', href: getPermalink('/solutions/dtc-brand') },
         { text: '跨境电商', href: getPermalink('/solutions/cross-border-ecommerce') },
@@ -66,6 +67,7 @@ export const footerData = {
     {
       title: '行业方案',
       links: [
+        { text: '方案总览', href: getPermalink('/solutions') },
         { text: 'B2B 外贸', href: getPermalink('/solutions/b2b-export') },
         { text: 'DTC 品牌出海', href: getPermalink('/solutions/dtc-brand') },
         { text: '跨境电商', href: getPermalink('/solutions/cross-border-ecommerce') },
