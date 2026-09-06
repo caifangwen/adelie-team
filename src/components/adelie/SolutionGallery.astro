@@ -1,5 +1,6 @@
 ---
 import Image from '~/components/common/Image.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 const items = [
   {
@@ -56,7 +57,7 @@ const items = [
       {
         items.map((item) => (
           <a
-            href={item.href}
+            href={getPermalink(item.href)}
             class:list={[
               'group relative overflow-hidden border-2 border-black bg-black shadow-[6px_6px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff]',
               item.featured && 'lg:col-span-2',

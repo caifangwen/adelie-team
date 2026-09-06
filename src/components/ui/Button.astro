@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 import type { CallToAction as Props } from '~/types';
+import { getPermalink } from '~/utils/permalinks';
 
 const {
   variant = 'secondary',
@@ -10,8 +11,11 @@ const {
   icon = '',
   class: className = '',
   type,
+  href,
   ...rest
 } = Astro.props;
+
+const resolvedHref = href ? getPermalink(String(href)) : undefined;
 
 const variants = {
   primary: 'btn-primary',
@@ -29,6 +33,7 @@ const variants = {
     </button>
   ) : (
     <a
+      href={resolvedHref}
       class={twMerge(variants[variant] || '', className)}
       {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
       {...rest}

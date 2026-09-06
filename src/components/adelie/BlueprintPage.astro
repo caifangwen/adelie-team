@@ -21,7 +21,7 @@ interface Props {
     title: string;
     path: string;
     body: string;
-    data?: { excerpt?: string; image?: string; category?: string; readingTime?: string };
+    data?: { title?: string; excerpt?: string; image?: string; category?: string; readingTime?: string };
   }>;
 }
 
@@ -46,9 +46,9 @@ const itemFrom = (line: string): Item => {
   return { title: clean(text.slice(0, divider)), description: clean(text.slice(divider + 1)) };
 };
 
-/** 抽取“图片”行并移除出条目列表，返回图片地址（description 为空时从 title 里剥离前缀） */
+/** 抽取“图片：URL”行并移除出条目列表。 */
 const takeImage = (items: Item[], alt: string): { rest: Item[]; image?: SectionImage; images: SectionImage[] } => {
-  const media = items.filter((item) => /^(图片|配图|主图)/.test(item.title));
+  const media = items.filter((item) => /^(图片|配图|主图)$/.test(item.title) && item.description);
   const images = media
     .map((item, index) => {
       const src = item.description || item.title.replace(/^(图片|配图|主图)[:：]?/, '').trim();
@@ -175,7 +175,8 @@ const isProcess = (section: Section) =>
   /流程|阶段|节奏|闭环|路径|目录|推进|步骤/.test(section.title) ||
   (path === 'about/process' && /启动|执行|持续/.test(section.title));
 const isFaq = (section: Section) => /FAQ/.test(section.title);
-const isAudienceSection = (section: Section) => /适用|业务场景|需要完成的判断|决策内容重点|购买决策重点/.test(section.title);
+const isAudienceSection = (section: Section) =>
+  /适用|业务场景|需要完成的判断|决策内容重点|购买决策重点/.test(section.title);
 
 /** 流程页里的“表单提示 / 关键指标”这类备注，提升为区块副标题 */
 const isFlowNote = (item: Item) => /提示|指标|备注|说明/.test(item.title) && !!item.description;
@@ -265,7 +266,12 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
               )}
             </div>
             <div class="relative intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              {isSolutionPage && <div class="absolute -right-3 -top-3 h-20 w-20 border-2 border-black bg-accent dark:border-white" aria-hidden="true" />}
+              {isSolutionPage && (
+                <div
+                  class="absolute -right-3 -top-3 h-20 w-20 border-2 border-black bg-accent dark:border-white"
+                  aria-hidden="true"
+                />
+              )}
               <Image
                 src={heroImage.src}
                 alt={heroImage.alt}
@@ -340,7 +346,13 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
           bg={bg}
         />
       ) : isSolutionPage ? (
-        <SolutionCards title={section.title} subtitle={section.subtitle} items={section.items} images={section.images} bg={bg} />
+        <SolutionCards
+          title={section.title}
+          subtitle={section.subtitle}
+          items={section.items}
+          images={section.images}
+          bg={bg}
+        />
       ) : (
         <Features
           title={section.title}
@@ -376,7 +388,8 @@ const altBg = '<div class="absolute inset-0 bg-secondary/5 dark:bg-white/5"></di
   ) : (
     !isCaseDetail &&
     !isResourceDetail &&
-    children.length > 0 && path !== 'solutions' && (
+    children.length > 0 &&
+    path !== 'solutions' && (
       <Features
         title="相关内容"
         items={children.map((child) => ({

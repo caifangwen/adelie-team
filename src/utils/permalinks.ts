@@ -101,4 +101,10 @@ export const getAsset = (path: string): string =>
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string => {
+  const base = trimSlash(BASE_PATHNAME);
+  const pathname = trimSlash(permalink);
+  return createPath(
+    base && (pathname === base || pathname.startsWith(`${base}/`)) ? pathname : createPath(base, pathname)
+  );
+};

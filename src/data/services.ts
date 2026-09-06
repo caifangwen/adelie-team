@@ -5,7 +5,7 @@ export interface ServicePageData {
   title: string;
   subtitle: string;
   action: string;
-  image?: { src: string; alt: string };
+  image: { src: string; alt: string };
   problemsTitle: string;
   problems: Array<{ title: string; description: string; icon: string }>;
   deliverablesTitle: string;

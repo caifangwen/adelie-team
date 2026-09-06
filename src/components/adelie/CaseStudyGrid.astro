@@ -1,5 +1,6 @@
 ---
 import Image from '~/components/common/Image.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 interface CaseStudy {
   title: string;
@@ -64,7 +65,7 @@ const { title = '代表案例', actionText = '查看详情', categories = [], fi
       {
         items.map((item) => (
           <a
-            href={item.path}
+            href={getPermalink(item.path)}
             data-resource-card={filterable ? '' : undefined}
             data-categories={item.categories?.join('|')}
             class="group block overflow-hidden border-2 border-black bg-page shadow-[6px_6px_0_#18181b] transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] dark:hover:shadow-[10px_10px_0_#fff]"
@@ -104,15 +105,15 @@ const { title = '代表案例', actionText = '查看详情', categories = [], fi
 
 <script>
   const bindResourceFilters = () => {
-    document.querySelectorAll('[data-resource-grid]').forEach((grid) => {
+    document.querySelectorAll<HTMLElement>('[data-resource-grid]').forEach((grid) => {
       if (grid.dataset.filtersBound) return;
       grid.dataset.filtersBound = 'true';
       const section = grid.closest('section');
-      const buttons = section?.querySelectorAll('[data-resource-filter]') ?? [];
-      const cards = grid.querySelectorAll('[data-resource-card]');
+      const buttons = section?.querySelectorAll<HTMLButtonElement>('[data-resource-filter]') ?? [];
+      const cards = grid.querySelectorAll<HTMLElement>('[data-resource-card]');
       buttons.forEach((button) =>
         button.addEventListener('click', () => {
-          const filter = button.dataset.resourceFilter;
+          const filter = button.dataset.resourceFilter ?? '全部';
           buttons.forEach((item) => {
             const selected = item === button;
             item.setAttribute('aria-pressed', String(selected));
