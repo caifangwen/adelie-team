@@ -78,7 +78,19 @@ const blueprintCollection = defineCollection({
   }),
 });
 
+const docsCollection = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: 'src/content/docs' }),
+  schema: z
+    .object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      excerpt: z.string().optional(),
+    })
+    .catchall(z.unknown()),
+});
+
 export const collections = {
   post: postCollection,
   blueprint: blueprintCollection,
+  docs: docsCollection,
 };

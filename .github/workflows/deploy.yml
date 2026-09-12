@@ -14,10 +14,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: withastro/action@v6
+      - name: Checkout site
+        uses: actions/checkout@v4
         with:
-          node-version: 24
+          path: site
+
+      - name: Checkout docs
+        uses: actions/checkout@v4
+        with:
+          repository: caifangwen/caifangwen.github.io
+          path: site/src/content/docs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: site
+
+      - name: Build site
+        run: npm run build
+        working-directory: site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
 
   deploy:
     needs: build
