@@ -1,6 +1,7 @@
 # 案例详情：Arden Tools Google Ads 重构
 
 ## 01. Hero
+
 - 图片：`https://images.unsplash.com/photo-1519389950473-47ba0277781c`
 - 标签：`B2B 询盘｜Search｜Google Search｜转化追踪`
 - 标题：`先让每一条线索被正确记录，再谈扩大广告预算。`
@@ -9,19 +10,23 @@
 - 组件：`SiteHeader`、`CaseHero`、`MetricBadge`、`Notice`。
 
 ## 02. 客户背景与挑战
+
 - 正文：`Arden Tools 的广告账户已有稳定花费，但表单事件与电话咨询没有统一记录，搜索词报告中存在大量低相关访问。`
 - 组件：`TextMediaSplit`、`ChallengeList`。
 
 ## 03. 我们的做法
+
 - `修复追踪`：`区分表单提交、合格线索和低价值动作。`
 - `重建搜索结构`：`按产品意图与市场拆分广告组，并持续添加否定词。`
 - `改进落地页`：`让广告中的产品承诺在首屏得到直接回应。`
 - 组件：`ApproachSteps`、`AccountStructurePreview`。
 
 ## 04. 结果与证据
+
 - 图表标题：`优化前后：合格线索、单条线索成本和搜索词质量`。
 - 组件：`BeforeAfterChart`、`MetricGrid`、`EvidenceNote`。
 
 ## 05. CTA
+
 - 文案：`你的账户是否也把预算花在了错误的搜索上？`
 - 组件：`RelatedCaseList`、`LeadForm`、`SiteFooter`。

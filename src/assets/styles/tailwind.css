@@ -59,7 +59,9 @@
 }
 
 body {
-  background-image: linear-gradient(rgb(24 24 27 / 8%) 1px, transparent 1px), linear-gradient(90deg, rgb(24 24 27 / 8%) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgb(24 24 27 / 8%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(24 24 27 / 8%) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
