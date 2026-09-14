@@ -38,6 +38,10 @@ export default defineConfig({
   // Native Fonts API: self-hosts + subsets + preloads Inter and generates
   // metric-adjusted fallbacks. Injected via <Font /> in Layout.astro and
   // consumed through the `--font-inter` CSS variable in CustomStyles.astro.
+  //
+  // Noto Sans SC covers all Chinese copy (Inter is latin-only). It ships as
+  // unicode-range slices, so browsers only download the glyphs a page uses;
+  // intentionally NOT preloaded in Layout.astro to avoid preloading slices.
   fonts: [
     {
       provider: fontProviders.fontsource(),
@@ -47,6 +51,15 @@ export default defineConfig({
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Noto Sans SC',
+      cssVariable: '--font-noto-sc',
+      weights: ['100 900'],
+      styles: ['normal'],
+      subsets: ['chinese-simplified', 'latin'],
+      fallbacks: ['PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'sans-serif'],
     },
   ],
 

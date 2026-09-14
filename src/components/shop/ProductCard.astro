@@ -1,0 +1,77 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import { getPermalink } from '~/utils/permalinks';
+import type { Product } from '~/data/products';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+const badgeColors: Record<string, string> = {
+  热卖: 'bg-[#d65861] text-white',
+  新品: 'bg-[#49b9ae] text-black',
+  特惠: 'bg-[#f7bb4e] text-black',
+};
+---
+
+<div
+  class="group flex flex-col overflow-hidden border-2 border-black bg-page shadow-[6px_6px_0_#18181b] transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] dark:hover:shadow-[10px_10px_0_#fff]"
+>
+  <a href={getPermalink('/shop/product')} class="relative block">
+    <div class="relative aspect-square overflow-hidden border-b-2 border-black dark:border-white">
+      <Image
+        src={product.image}
+        alt={product.name}
+        width={600}
+        height={600}
+        widths={[320, 480, 600]}
+        layout="cover"
+        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    </div>
+    {
+      product.badge && (
+        <span
+          class:list={[
+            'absolute left-3 top-3 border-2 border-black px-2 py-0.5 text-xs font-bold dark:border-white',
+            badgeColors[product.badge],
+          ]}
+        >
+          {product.badge}
+        </span>
+      )
+    }
+  </a>
+  <div class="flex flex-1 flex-col p-5">
+    <p class="text-xs font-bold tracking-wide text-muted">{product.category}</p>
+    <a href={getPermalink('/shop/product')}>
+      <h3 class="mt-2 text-lg font-bold leading-snug group-hover:text-primary">{product.name}</h3>
+    </a>
+    <div class="mt-2 flex items-center gap-1" aria-label={`评分 ${product.rating} 分`}>
+      {
+        Array.from({ length: 5 }, (_, i) => (
+          <Icon
+            name={i < Math.round(product.rating) ? 'tabler:star-filled' : 'tabler:star'}
+            class="h-4 w-4 text-[#f7bb4e]"
+          />
+        ))
+      }
+      <span class="ml-1 text-xs text-muted">{product.rating}（{product.reviews} 条评价）</span>
+    </div>
+    <div class="mt-3 flex items-baseline gap-2">
+      <span class="text-2xl font-bold">¥{product.price}</span>
+      {product.originalPrice && <span class="text-sm text-muted line-through">¥{product.originalPrice}</span>}
+    </div>
+    <button
+      type="button"
+      class="btn-primary mt-4 w-full cursor-pointer justify-center px-4 py-2.5 text-sm"
+      aria-label={`将${product.name}加入购物车`}
+    >
+      <Icon name="tabler:shopping-cart-plus" class="mr-1.5 h-5 w-5" />
+      加入购物车
+    </button>
+  </div>
+</div>

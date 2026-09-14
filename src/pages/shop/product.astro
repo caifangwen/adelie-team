@@ -1,0 +1,270 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+import ProductCard from '~/components/shop/ProductCard.astro';
+import ShopSectionHead from '~/components/shop/ShopSectionHead.astro';
+import { products } from '~/data/products';
+import { getPermalink } from '~/utils/permalinks';
+
+const product = products[0];
+
+const metadata = {
+  title: `${product.name}｜商城`,
+  description: product.description,
+};
+
+const related = products
+  .filter((p) => p.slug !== product.slug && p.category === product.category)
+  .concat(products.filter((p) => p.slug !== product.slug && p.category !== product.category))
+  .slice(0, 4);
+
+const assurances = [
+  ['tabler:truck-delivery', '满 ¥299 包邮'],
+  ['tabler:refresh', '7 天无理由退换'],
+  ['tabler:shield-check', '正品保障'],
+];
+
+const colorSwatches: Record<string, string> = {
+  曜石黑: 'bg-zinc-900',
+  云岩白: 'bg-zinc-100',
+  深海蓝: 'bg-blue-800',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+    <!-- 面包屑 -->
+    <nav aria-label="面包屑" class="text-sm font-bold">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href={getPermalink('/')} class="text-muted hover:text-primary">首页</a></li>
+        <li aria-hidden="true" class="text-muted">/</li>
+        <li><a href={getPermalink('/shop')} class="text-muted hover:text-primary">商城</a></li>
+        <li aria-hidden="true" class="text-muted">/</li>
+        <li><a href={getPermalink('/shop/products')} class="text-muted hover:text-primary">{product.category}</a></li>
+        <li aria-hidden="true" class="text-muted">/</li>
+        <li aria-current="page" class="truncate">{product.name}</li>
+      </ol>
+    </nav>
+
+    <div class="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <!-- 图片 -->
+      <div>
+        <div
+          class="relative aspect-square overflow-hidden border-2 border-black bg-white shadow-[10px_10px_0_#18181b] dark:border-white dark:bg-zinc-900 dark:shadow-[10px_10px_0_#fff]"
+        >
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={800}
+            height={800}
+            widths={[400, 640, 800]}
+            layout="cover"
+            class="h-full w-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+          {
+            product.badge && (
+              <span class="absolute left-4 top-4 border-2 border-black bg-[#d65861] px-2 py-0.5 text-xs font-bold text-white dark:border-white">
+                {product.badge}
+              </span>
+            )
+          }
+        </div>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+          {
+            [0, 1, 2].map((i) => (
+              <button
+                type="button"
+                aria-label={`查看第 ${i + 1} 张图片`}
+                class:list={[
+                  'relative aspect-square overflow-hidden border-2 border-black dark:border-white',
+                  i === 0 ? 'shadow-[4px_4px_0_#18181b] dark:shadow-[4px_4px_0_#fff]' : 'opacity-60 hover:opacity-100',
+                ]}
+              >
+                <Image
+                  src={product.image}
+                  alt={`${product.name} 缩略图 ${i + 1}`}
+                  width={200}
+                  height={200}
+                  widths={[200]}
+                  layout="cover"
+                  class="h-full w-full object-cover"
+                />
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- 信息 -->
+      <div>
+        {
+          product.badge && (
+            <span class="inline-block border-2 border-black bg-[#d65861] px-2 py-0.5 text-xs font-bold text-white dark:border-white">
+              {product.badge}
+            </span>
+          )
+        }
+        <h1 class="mt-4 font-heading text-4xl font-bold tracking-tight md:text-5xl">{product.name}</h1>
+        <div class="mt-4 flex items-center gap-2">
+          {
+            Array.from({ length: 5 }, (_, i) => (
+              <Icon
+                name={i < Math.round(product.rating) ? 'tabler:star-filled' : 'tabler:star'}
+                class="h-5 w-5 text-[#f7bb4e]"
+              />
+            ))
+          }
+          <span class="text-sm font-bold">{product.rating}</span>
+          <span class="text-sm text-muted">· {product.reviews} 条评价</span>
+        </div>
+
+        <div class="mt-6 border-2 border-black bg-[#c8ed34] p-5 text-black dark:border-white">
+          <div class="flex flex-wrap items-baseline gap-3">
+            <span class="text-5xl font-bold tracking-tighter">¥{product.price}</span>
+            {
+              product.originalPrice && (
+                <span class="text-lg text-black/60 line-through">¥{product.originalPrice}</span>
+              )
+            }
+            {
+              product.originalPrice && (
+                <span class="border-2 border-black bg-black px-2 py-0.5 text-xs font-bold text-[#c8ed34]">
+                  限时省 ¥{product.originalPrice - product.price}
+                </span>
+              )
+            }
+          </div>
+          <p class="mt-2 text-sm font-bold text-black/70">新用户下单再减 ¥30 · 满 ¥299 包邮</p>
+        </div>
+
+        <!-- 颜色 -->
+        {
+          product.colors && (
+            <div class="mt-7">
+              <p class="text-sm font-bold">
+                颜色 <span class="ml-1 font-normal text-muted">{product.colors[0]}</span>
+              </p>
+              <div class="mt-3 flex gap-3">
+                {product.colors.map((color, i) => (
+                  <button
+                    type="button"
+                    aria-label={color}
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                    class:list={[
+                      'h-9 w-9 border-2 border-black transition-transform hover:-translate-y-0.5 dark:border-white',
+                      colorSwatches[color] ?? 'bg-zinc-400',
+                      i === 0 && 'shadow-[3px_3px_0_#18181b] outline outline-2 outline-offset-2 outline-black dark:shadow-[3px_3px_0_#fff] dark:outline-white',
+                    ]}
+                  />
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <!-- 尺码 -->
+        {
+          product.sizes && (
+            <div class="mt-7">
+              <p class="text-sm font-bold">尺码</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {product.sizes.map((size, i) => (
+                  <button
+                    type="button"
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                    class:list={[
+                      'border-2 border-black px-4 py-2 text-sm font-bold transition-transform hover:-translate-y-0.5 dark:border-white',
+                      i === 0
+                        ? 'bg-primary text-black shadow-[3px_3px_0_#18181b] dark:shadow-[3px_3px_0_#fff]'
+                        : 'bg-page',
+                    ]}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <!-- 数量 + 购买 -->
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <div class="flex items-center border-2 border-black dark:border-white">
+            <button
+              type="button"
+              class="flex h-12 w-12 items-center justify-center border-r-2 border-black transition-colors hover:bg-accent hover:text-black dark:border-white"
+              aria-label="减少数量"
+            >
+              <Icon name="tabler:minus" class="h-4 w-4" />
+            </button>
+            <span class="w-14 text-center font-bold">1</span>
+            <button
+              type="button"
+              class="flex h-12 w-12 items-center justify-center border-l-2 border-black transition-colors hover:bg-accent hover:text-black dark:border-white"
+              aria-label="增加数量"
+            >
+              <Icon name="tabler:plus" class="h-4 w-4" />
+            </button>
+          </div>
+          <button type="button" class="btn-primary flex-1 justify-center whitespace-nowrap px-6 py-3.5">
+            <Icon name="tabler:shopping-cart-plus" class="mr-1.5 h-5 w-5" />
+            加入购物车
+          </button>
+          <button
+            type="button"
+            class="btn flex-1 justify-center whitespace-nowrap bg-black px-6 py-3.5 text-white hover:bg-zinc-800 dark:bg-white dark:text-black"
+          >
+            立即购买
+          </button>
+        </div>
+
+        <!-- 服务保障 -->
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t-2 border-black pt-6 text-sm dark:border-white">
+          {
+            assurances.map(([icon, text]) => (
+              <li class="flex items-center gap-2 text-muted">
+                <Icon name={icon} class="h-5 w-5 text-primary" />
+                {text}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- 商品详情 -->
+    <div class="mt-20 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="font-heading text-3xl font-bold tracking-tight md:text-4xl">商品详情</h2>
+        <p class="mt-6 leading-8 text-muted">{product.description}</p>
+      </div>
+      <div class="overflow-hidden border-2 border-black shadow-[6px_6px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff]">
+        <table class="w-full text-sm">
+          <tbody>
+            {
+              product.specs.map(([label, value], i) => (
+                <tr class:list={[i % 2 === 0 ? 'bg-page' : 'bg-white dark:bg-zinc-900', 'border-b-2 border-black last:border-b-0 dark:border-white']}>
+                  <th scope="row" class="w-32 border-r-2 border-black px-4 py-3 text-left font-bold dark:border-white">
+                    {label}
+                  </th>
+                  <td class="px-4 py-3 text-muted">{value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 相关推荐 -->
+    <div class="mt-20">
+      <ShopSectionHead title="相关推荐" subtitle="YOU MAY ALSO LIKE" linkText="查看全部" linkHref="/shop/products" />
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {related.map((item) => <ProductCard product={item} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

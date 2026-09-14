@@ -1,0 +1,96 @@
+---
+import { Icon } from 'astro-icon/components';
+import Layout from '~/layouts/PageLayout.astro';
+import Button from '~/components/ui/Button.astro';
+import CartItemRow from '~/components/shop/CartItemRow.astro';
+import ProductCard from '~/components/shop/ProductCard.astro';
+import ShopSectionHead from '~/components/shop/ShopSectionHead.astro';
+import { products } from '~/data/products';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: '购物车｜商城',
+  description: '查看购物车中的商品，满 ¥299 免运费，支持支付宝、微信与银行卡支付。',
+};
+
+const cartItems = products.slice(0, 3).map((product, i) => ({ product, quantity: i + 1 }));
+const subtotal = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+const shipping = subtotal >= 299 ? 0 : 12;
+const discount = 30;
+const total = subtotal + shipping - discount;
+
+const recommendations = products.slice(5, 9);
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+    <p class="text-sm font-bold tracking-[0.16em] text-primary">SHOPPING CART</p>
+    <h1 class="mt-3 font-heading text-4xl font-bold tracking-tight md:text-6xl">购物车</h1>
+    <p class="mt-3 text-muted">共 {cartItems.length} 件商品，还差 ¥{Math.max(0, 299 - subtotal)} 即可免运费。</p>
+
+    <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_24rem] lg:items-start">
+      <!-- 商品列表 -->
+      <div class="grid gap-5">
+        {cartItems.map((item) => <CartItemRow product={item.product} quantity={item.quantity} />)}
+        <a
+          href={getPermalink('/shop/products')}
+          class="inline-flex items-center gap-2 font-bold underline underline-offset-4 hover:text-primary"
+        >
+          <Icon name="tabler:arrow-left" class="h-4 w-4" />
+          继续购物
+        </a>
+      </div>
+
+      <!-- 订单汇总 -->
+      <aside
+        class="border-2 border-black bg-accent p-6 text-black shadow-[8px_8px_0_#18181b] dark:border-white dark:shadow-[8px_8px_0_#fff] lg:sticky lg:top-28"
+      >
+        <h2 class="text-2xl font-bold">订单汇总</h2>
+        <dl class="mt-6 grid gap-3 text-sm font-bold">
+          <div class="flex justify-between">
+            <dt>商品小计</dt>
+            <dd>¥{subtotal}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt>运费</dt>
+            <dd>{shipping === 0 ? '免运费' : `¥${shipping}`}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt>新用户优惠</dt>
+            <dd>-¥{discount}</dd>
+          </div>
+        </dl>
+        {
+          shipping > 0 ? (
+            <p class="mt-4 border-2 border-black bg-page px-3 py-2 text-xs font-bold">
+              再买 ¥{299 - subtotal} 即可免运费
+            </p>
+          ) : (
+            <p class="mt-4 border-2 border-black bg-page px-3 py-2 text-xs font-bold">已满足满 ¥299 免运费</p>
+          )
+        }
+        <div class="mt-6 flex items-baseline justify-between border-t-2 border-black pt-5">
+          <span class="font-bold">合计</span>
+          <span class="text-4xl font-bold tracking-tighter">¥{total}</span>
+        </div>
+        <Button variant="primary" text="去结算" href="/shop/cart" icon="tabler:arrow-right" class="mt-6 w-full justify-center" />
+        <div class="mt-6 border-t-2 border-black/25 pt-4">
+          <p class="text-xs font-bold text-black/60">支持支付方式</p>
+          <div class="mt-3 flex items-center gap-4">
+            <Icon name="tabler:brand-alipay" class="h-7 w-7" aria-label="支付宝" />
+            <Icon name="tabler:brand-wechat" class="h-7 w-7" aria-label="微信支付" />
+            <Icon name="tabler:credit-card" class="h-7 w-7" aria-label="银行卡" />
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 猜你喜欢 -->
+    <div class="mt-20">
+      <ShopSectionHead title="猜你喜欢" subtitle="RECOMMENDED" linkText="查看全部" linkHref="/shop/products" />
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {recommendations.map((product) => <ProductCard product={product} />)}
+      </div>
+    </div>
+  </section>
+</Layout>

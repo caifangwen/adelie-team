@@ -3,6 +3,14 @@ import { getAsset, getPermalink } from './utils/permalinks';
 export const headerData = {
   links: [
     {
+      text: '商城',
+      links: [
+        { text: '商城首页', href: getPermalink('/shop') },
+        { text: '全部商品', href: getPermalink('/shop/products') },
+        { text: '购物车', href: getPermalink('/shop/cart') },
+      ],
+    },
+    {
       text: '服务',
       links: [
         { text: 'WordPress 建站', href: getPermalink('/services/wordpress') },

@@ -1,0 +1,164 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: '个人简历 | 林一舟',
+  description: '林一舟的个人简历：8 年前端与全栈开发经验，专注出海品牌官网、性能优化与增长落地页。',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- 个人简介 -->
+  <Hero
+    tagline="个人简历"
+    title="林一舟 · 前端 / 全栈工程师"
+    subtitle="8 年 Web 开发经验，专注出海品牌官网与高性能落地页。擅长把设计、性能与转化目标放进同一套工程体系里交付。"
+    actions={[
+      { variant: 'primary', text: '下载 PDF 简历', href: '/resume.pdf', icon: 'tabler:download' },
+      { text: '联系我', href: '/contact' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
+      alt: '林一舟个人照片',
+    }}
+  />
+
+  <!-- 关键数据 -->
+  <Stats
+    stats={[
+      { amount: '8 年', title: '开发经验', icon: 'tabler:code' },
+      { amount: '40+', title: '交付项目', icon: 'tabler:rocket' },
+      { amount: '95+', title: '平均 Lighthouse 性能分', icon: 'tabler:gauge' },
+      { amount: '3 倍', title: '落地页询盘提升纪录', icon: 'tabler:trending-up' },
+    ]}
+  />
+
+  <!-- 核心技能 -->
+  <Features2
+    id="skills"
+    tagline="核心技能"
+    title="我能做什么"
+    subtitle="从页面实现到上线后的数据验证，覆盖一个增长型网站的完整链路。"
+    columns={3}
+    items={[
+      {
+        title: '前端开发',
+        description: 'Astro、React、TypeScript、Tailwind CSS，组件化与可维护性优先。',
+        icon: 'tabler:brand-html5',
+      },
+      {
+        title: '性能优化',
+        description: 'Core Web Vitals、图片管线、边缘缓存，把加载时间当作产品指标对待。',
+        icon: 'tabler:gauge',
+      },
+      {
+        title: 'SEO 技术实现',
+        description: '语义化结构、结构化数据、站点地图与国际化路由，让内容可被搜索理解。',
+        icon: 'tabler:seo',
+      },
+      {
+        title: '数据与追踪',
+        description: 'GA4、GTM、转化事件设计，让每一次改版都有可核验的依据。',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: '全栈与集成',
+        description: 'Node.js、Headless CMS、表单与邮件自动化、第三方支付与登录集成。',
+        icon: 'tabler:stack-2',
+      },
+      {
+        title: '协作与交付',
+        description: '与策略、设计同步推进，分阶段确认交付物，减少返工。',
+        icon: 'tabler:users',
+      },
+    ]}
+  />
+
+  <!-- 工作经历 -->
+  <Steps
+    id="experience"
+    tagline="工作经历"
+    title="我走过的路"
+    items={[
+      {
+        title: '2021 — 至今 · 高级前端工程师 @ Adelie',
+        description: '负责出海品牌官网与落地页的技术交付，主导性能与 SEO 技术规范，服务 20+ 跨境客户。',
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: '2018 — 2021 · 前端工程师 @ 某跨境电商 SaaS',
+        description: '负责店铺装修系统与营销落地页模板体系，支撑日均百万级页面访问。',
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: '2016 — 2018 · Web 开发工程师 @ 某数字营销公司',
+        description: '交付品牌官网与活动页面，首次完整负责从设计还原到上线运维的全流程。',
+        icon: 'tabler:briefcase',
+      },
+    ]}
+  />
+
+  <!-- 教育背景 -->
+  <Steps
+    id="education"
+    tagline="教育背景"
+    title="学习与认证"
+    items={[
+      {
+        title: '2012 — 2016 · 计算机科学与技术 · 本科',
+        description: '某理工大学，主修软件工程与计算机网络。',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Google UX Design Certificate',
+        description: '2022 年完成，系统补充以用户为中心的页面设计方法。',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'AWS Certified Cloud Practitioner',
+        description: '2023 年取得，用于站点部署与边缘架构的日常决策。',
+        icon: 'tabler:certificate',
+      },
+    ]}
+  />
+
+  <!-- 他人评价 -->
+  <Testimonials
+    id="testimonials"
+    tagline="他人评价"
+    title="合作过的人怎么说"
+    testimonials={[
+      {
+        testimonial: '他不只把页面做出来，还会追问这个页面对业务意味着什么。上线的每个版本都能说清楚为什么。',
+        name: '王倩',
+        job: '增长负责人 · 某出海 DTC 品牌',
+      },
+      {
+        testimonial: '交接文档和代码结构都非常干净，后续维护的成本远低于我们以往的外包经验。',
+        name: 'David Chen',
+        job: 'CTO · 某跨境 SaaS',
+      },
+      {
+        testimonial: '改版后核心落地页 LCP 从 4.2s 降到 1.6s，广告质量得分和询盘量都有明显提升。',
+        name: '李思远',
+        job: '投放经理 · 某 B2B 制造企业',
+      },
+    ]}
+  />
+
+  <!-- 联系 -->
+  <CallToAction
+    title="有合适的岗位或项目，欢迎聊聊。"
+    subtitle="简历中涉及的项目数据均可在沟通中提供佐证材料。"
+    actions={[
+      { variant: 'primary', text: '发送邮件', href: 'mailto:hello@example.com', icon: 'tabler:mail' },
+      { text: '查看联系页面', href: '/contact' },
+    ]}
+  />
+</Layout>

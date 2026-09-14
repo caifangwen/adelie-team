@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import { getPermalink } from '~/utils/permalinks';
+import type { Product } from '~/data/products';
+
+interface Props {
+  product: Product;
+  quantity: number;
+}
+
+const { product, quantity } = Astro.props;
+---
+
+<div
+  class="flex flex-col gap-4 border-2 border-black bg-page p-4 shadow-[6px_6px_0_#18181b] dark:border-white dark:shadow-[6px_6px_0_#fff] sm:flex-row sm:items-center"
+>
+  <a
+    href={getPermalink('/shop/product')}
+    class="relative block aspect-square w-full shrink-0 overflow-hidden border-2 border-black dark:border-white sm:w-24"
+  >
+    <Image
+      src={product.image}
+      alt={product.name}
+      width={200}
+      height={200}
+      widths={[200]}
+      layout="cover"
+      class="h-full w-full object-cover"
+    />
+  </a>
+  <div class="min-w-0 flex-1">
+    <a href={getPermalink('/shop/product')}>
+      <h3 class="font-bold leading-snug hover:text-primary">{product.name}</h3>
+    </a>
+    <p class="mt-1 text-sm text-muted">
+      {product.category}
+      {product.colors && <span> · {product.colors[0]}</span>}
+      {product.sizes && <span> · {product.sizes[1] ?? product.sizes[0]} 码</span>}
+    </p>
+    <p class="mt-1 text-sm font-bold sm:hidden">¥{product.price}</p>
+  </div>
+  <p class="hidden w-20 shrink-0 text-right font-bold sm:block">¥{product.price}</p>
+  <div class="flex shrink-0 items-center border-2 border-black dark:border-white">
+    <button
+      type="button"
+      class="flex h-9 w-9 items-center justify-center border-r-2 border-black transition-colors hover:bg-accent hover:text-black dark:border-white"
+      aria-label="减少数量"
+    >
+      <Icon name="tabler:minus" class="h-4 w-4" />
+    </button>
+    <span class="w-10 text-center text-sm font-bold">{quantity}</span>
+    <button
+      type="button"
+      class="flex h-9 w-9 items-center justify-center border-l-2 border-black transition-colors hover:bg-accent hover:text-black dark:border-white"
+      aria-label="增加数量"
+    >
+      <Icon name="tabler:plus" class="h-4 w-4" />
+    </button>
+  </div>
+  <p class="w-24 shrink-0 text-right text-lg font-bold">¥{product.price * quantity}</p>
+  <button
+    type="button"
+    class="shrink-0 self-start text-muted transition-colors hover:text-[#d65861] sm:self-center"
+    aria-label={`删除${product.name}`}
+  >
+    <Icon name="tabler:trash" class="h-5 w-5" />
+  </button>
+</div>

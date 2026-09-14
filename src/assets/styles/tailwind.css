@@ -14,10 +14,12 @@
   --color-muted: var(--aw-color-text-muted);
 
   --font-sans:
-    var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+    var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: var(--aw-font-serif, ui-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-heading: var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
 
   --animate-fade: none;
 }
@@ -69,10 +71,11 @@ body {
   background-image: none;
 }
 
+/* CJK-safe tightening: -0.055em cramps Chinese glyphs; -0.02em keeps the display feel */
 h1,
 h2,
 h3 {
-  letter-spacing: -0.055em;
+  letter-spacing: -0.02em;
 }
 
 /* Widgets previously relied on their entrance animation to clear this state. */
@@ -118,7 +121,7 @@ select:focus-visible {
 }
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
-  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
+  @apply bg-page md:bg-page border-b border-white/20;
   box-shadow: none;
 }
 

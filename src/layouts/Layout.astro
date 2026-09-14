@@ -33,6 +33,8 @@ const { language, textDirection } = I18N;
     <CommonMeta />
     <Favicons />
     <Font cssVariable="--font-inter" preload />
+    <!-- Noto Sans SC: no preload — its CJK unicode-range slices are fetched on demand -->
+    <Font cssVariable="--font-noto-sc" />
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />

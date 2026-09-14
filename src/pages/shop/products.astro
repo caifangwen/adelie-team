@@ -1,0 +1,109 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ProductCard from '~/components/shop/ProductCard.astro';
+import { products, categories } from '~/data/products';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: '全部商品｜商城',
+  description: '浏览商城全部精选商品：耳机数码、腕表配饰、运动户外、箱包、家居生活与服饰。',
+};
+
+const filterPills = ['全部', ...categories.map((c) => c.name)];
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+    <!-- 面包屑 -->
+    <nav aria-label="面包屑" class="text-sm font-bold">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href={getPermalink('/')} class="text-muted hover:text-primary">首页</a></li>
+        <li aria-hidden="true" class="text-muted">/</li>
+        <li><a href={getPermalink('/shop')} class="text-muted hover:text-primary">商城</a></li>
+        <li aria-hidden="true" class="text-muted">/</li>
+        <li aria-current="page">全部商品</li>
+      </ol>
+    </nav>
+
+    <div class="mt-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+      <div>
+        <p class="text-sm font-bold tracking-[0.16em] text-primary">ALL PRODUCTS</p>
+        <h1 class="mt-3 font-heading text-4xl font-bold tracking-tight md:text-6xl">全部商品</h1>
+        <p class="mt-3 text-muted">共 {products.length} 件精选好物，每一件都经过真实评测。</p>
+      </div>
+      <!-- 排序 -->
+      <label class="flex items-center gap-3 text-sm font-bold">
+        排序
+        <select
+          class="border-2 border-black bg-page px-3 py-2 font-bold shadow-[4px_4px_0_#18181b] dark:border-white dark:shadow-[4px_4px_0_#fff]"
+          aria-label="商品排序"
+        >
+          <option>综合推荐</option>
+          <option>价格从低到高</option>
+          <option>价格从高到低</option>
+          <option>销量优先</option>
+          <option>最新上架</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- 分类筛选 -->
+    <div class="mt-8 flex flex-wrap gap-2" aria-label="按分类筛选">
+      {
+        filterPills.map((pill, index) => (
+          <button
+            type="button"
+            class:list={[
+              'border-2 border-black px-4 py-2 text-sm font-bold transition-transform hover:-translate-y-0.5 dark:border-white',
+              index === 0 ? 'bg-primary text-black shadow-[4px_4px_0_#18181b] dark:shadow-[4px_4px_0_#fff]' : 'bg-page',
+            ]}
+            aria-pressed={index === 0 ? 'true' : 'false'}
+          >
+            {pill}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- 商品网格 -->
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+
+    <!-- 分页 -->
+    <nav aria-label="商品分页" class="mt-14 flex justify-center">
+      <ul class="flex items-center gap-2">
+        <li>
+          <button
+            type="button"
+            class="border-2 border-black bg-primary px-4 py-2 font-bold text-black shadow-[4px_4px_0_#18181b] dark:border-white dark:shadow-[4px_4px_0_#fff]"
+            aria-current="page"
+          >
+            1
+          </button>
+        </li>
+        {
+          [2, 3].map((page) => (
+            <li>
+              <button
+                type="button"
+                class="border-2 border-black bg-page px-4 py-2 font-bold shadow-[4px_4px_0_#18181b] transition-transform hover:-translate-y-0.5 dark:border-white dark:shadow-[4px_4px_0_#fff]"
+              >
+                {page}
+              </button>
+            </li>
+          ))
+        }
+        <li aria-hidden="true" class="px-1 font-bold text-muted">…</li>
+        <li>
+          <button
+            type="button"
+            class="border-2 border-black bg-page px-4 py-2 font-bold shadow-[4px_4px_0_#18181b] transition-transform hover:-translate-y-0.5 dark:border-white dark:shadow-[4px_4px_0_#fff]"
+          >
+            下一页 →
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </section>
+</Layout>

@@ -1,0 +1,26 @@
+---
+import { getPermalink } from '~/utils/permalinks';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  linkText?: string;
+  linkHref?: string;
+}
+
+const { title, subtitle, linkText, linkHref } = Astro.props;
+---
+
+<div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+  <div>
+    {subtitle && <p class="text-sm font-bold tracking-[0.16em] text-primary">{subtitle}</p>}
+    <h2 class="mt-3 font-heading text-4xl font-bold tracking-tight md:text-5xl">{title}</h2>
+  </div>
+  {
+    linkText && linkHref && (
+      <a href={getPermalink(linkHref)} class="font-bold underline underline-offset-4 hover:text-primary">
+        {linkText} →
+      </a>
+    )
+  }
+</div>

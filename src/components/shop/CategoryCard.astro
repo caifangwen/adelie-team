@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getPermalink } from '~/utils/permalinks';
+
+interface Props {
+  name: string;
+  count: number;
+  icon: string;
+  color: string;
+}
+
+const { name, count, icon, color } = Astro.props;
+---
+
+<a
+  href={getPermalink('/shop/products')}
+  class:list={[
+    'group flex items-center gap-3 border-2 border-black p-4 text-black shadow-[4px_4px_0_#18181b] transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0_#18181b] dark:border-white dark:shadow-[4px_4px_0_#fff] dark:hover:shadow-[8px_8px_0_#fff]',
+    color,
+  ]}
+>
+  <Icon name={icon} class="h-7 w-7 shrink-0 transition-transform group-hover:rotate-[-8deg] group-hover:scale-110" />
+  <div>
+    <p class="font-bold">{name}</p>
+    <p class="text-xs text-black/60">{count} 件商品</p>
+  </div>
+</a>
